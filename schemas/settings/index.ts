@@ -1,5 +1,4 @@
 import { CogIcon } from '@sanity/icons'
-import * as demo from 'lib/demo.data'
 import { defineArrayMember, defineField, defineType } from 'sanity'
 
 import OpenGraphInput from './OpenGraphInput'
@@ -18,16 +17,16 @@ export default defineType({
       description: 'This field is the title of your blog.',
       title: 'Title',
       type: 'string',
-      initialValue: demo.title,
+      initialValue: 'initial value set in schemas/settings/index.ts',
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'description',
       description:
         'Used both for the <meta> description tag for SEO, and the blog subheader.',
-      title: 'Descriprion',
+      title: 'Description',
       type: 'array',
-      initialValue: demo.description,
+      initialValue: ['initial value set in schemas/settings/index.ts'],
       of: [
         defineArrayMember({
           type: 'block',
@@ -69,7 +68,7 @@ export default defineType({
           name: 'title',
           title: 'Title',
           type: 'string',
-          initialValue: demo.ogImageTitle,
+          initialValue: 'initial value set in schemas/settings/index.ts',
         }),
       ],
     }),

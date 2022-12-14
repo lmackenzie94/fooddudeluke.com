@@ -1,5 +1,5 @@
-import Layout from 'components/BlogLayout'
 import Container from 'components/Container'
+import Layout from 'components/Layout'
 import MoreStories from 'components/MoreStories'
 import PostsList from 'components/PostsList'
 import type { Post, Question, Settings } from 'lib/sanity.queries'
@@ -46,7 +46,7 @@ const ListHeader = ({
   type: 'posts' | 'questions'
   btnColor: string
 }) => (
-  <div className="flex items-center justify-between mb-4 md:mb-6">
+  <div className="mb-4 flex items-center justify-between md:mb-6">
     <h2 className="h1">{heading}</h2>
     <Link
       href={`/${type}`}

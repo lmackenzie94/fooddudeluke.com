@@ -1,5 +1,5 @@
-import Layout from 'components/BlogLayout'
 import Container from 'components/Container'
+import Layout from 'components/Layout'
 import MoreStories from 'components/MoreStories'
 import PostsList from 'components/PostsList'
 import type { Post } from 'lib/sanity.queries'

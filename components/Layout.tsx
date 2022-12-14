@@ -1,5 +1,6 @@
 import AlertBanner from 'components/for-reference/AlertBanner'
-import Header from 'components/Header'
+
+import Header from './Header'
 
 export default function Layout({
   preview,
@@ -13,7 +14,7 @@ export default function Layout({
   logoTag?: 'h1' | 'h2' | 'h3'
 }) {
   return (
-    <div className="min-h-screen">
+    <div className="site-layout">
       <AlertBanner preview={preview} loading={loading} />
       <Header titleTag={logoTag} />
       <main className="container">{children}</main>

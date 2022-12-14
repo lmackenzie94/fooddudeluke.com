@@ -1,7 +1,7 @@
 // import 'tailwindcss/tailwind.css'
-import './index.css'
+import './index.scss'
 
-// this layout applies to the Studio as well...
+// this layout (and hence the styles ^) applies to the Studio as well...
 export default function RootLayout({
   children,
 }: {
@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className="text-black bg-white">{children}</body>
+      <body className="bg-white text-black">{children}</body>
     </html>
   )
 }

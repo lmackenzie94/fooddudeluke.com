@@ -1,8 +1,7 @@
-import Layout from 'components/BlogLayout'
 import Container from 'components/Container'
 import PostTitle from 'components/for-reference/PostTitle'
+import Layout from 'components/Layout'
 import PostBody from 'components/PostBody'
-import * as demo from 'lib/demo.data'
 import type { Question, Settings } from 'lib/sanity.queries'
 import { formatTitle } from 'lib/utils/formatTitle'
 import { notFound } from 'next/navigation'
@@ -15,7 +14,7 @@ export default function QuestionPage(props: {
 }) {
   const { preview, loading, data, settings } = props
   const { question = {} as any, moreQuestions = [] } = data || {}
-  const { title = demo.title } = settings || {}
+  const { title } = settings || {}
 
   const slug = question?.slug
 
@@ -30,7 +29,7 @@ export default function QuestionPage(props: {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="prose-sm prose prose-h1:text-2xl prose-h2:text-lg md:prose-base">
+            <article className="prose prose-sm prose-h1:text-2xl prose-h2:text-lg md:prose-base">
               {/* <Head>
               <title>{title}</title>
               {question.socialImageURL && (

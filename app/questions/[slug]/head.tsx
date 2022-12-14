@@ -1,5 +1,4 @@
 import BlogMeta from 'components/for-reference/BlogMeta'
-import * as demo from 'lib/demo.data'
 import { getQuestionBySlug, getSettings } from 'lib/sanity.client'
 
 export default async function SlugHead({
@@ -7,7 +6,7 @@ export default async function SlugHead({
 }: {
   params: { slug: string }
 }) {
-  const [{ title = demo.title }, question] = await Promise.all([
+  const [{ title }, question] = await Promise.all([
     getSettings(),
     getQuestionBySlug(params.slug),
   ])

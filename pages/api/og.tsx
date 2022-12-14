@@ -11,7 +11,6 @@ import {
   OpenGraphImage,
   width,
 } from 'components/for-reference/OpenGraphImage'
-import * as demo from 'lib/demo.data'
 import { Settings, settingsQuery } from 'lib/sanity.queries'
 
 export default async function og(req: NextRequest, res: NextResponse) {
@@ -32,19 +31,16 @@ export default async function og(req: NextRequest, res: NextResponse) {
     title = settings?.ogImage?.title
   }
 
-  return new ImageResponse(
-    <OpenGraphImage title={title || demo.ogImageTitle} />,
-    {
-      width,
-      height,
-      fonts: [
-        {
-          name: 'Inter',
-          data: await font,
-          style: 'normal',
-          weight: 700,
-        },
-      ],
-    }
-  )
+  return new ImageResponse(<OpenGraphImage title={title} />, {
+    width,
+    height,
+    fonts: [
+      {
+        name: 'Inter',
+        data: await font,
+        style: 'normal',
+        weight: 700,
+      },
+    ],
+  })
 }
