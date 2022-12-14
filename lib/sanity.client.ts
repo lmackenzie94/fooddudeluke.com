@@ -3,11 +3,13 @@ import 'server-only'
 import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
 import {
   type Post,
+  type Question,
   type Settings,
-  indexQuery,
   postAndMoreStoriesQuery,
   postBySlugQuery,
   postSlugsQuery,
+  postsQuery,
+  questionsQuery,
   settingsQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
@@ -19,6 +21,7 @@ const client = projectId
   ? createClient({ projectId, dataset, apiVersion, useCdn })
   : null
 
+// GET SETTINGS
 export async function getSettings(): Promise<Settings> {
   if (client) {
     return (await client.fetch(settingsQuery)) || {}
@@ -26,9 +29,36 @@ export async function getSettings(): Promise<Settings> {
   return {}
 }
 
+// GET POSTS FOR HOME PAGE
+export async function getPostsForHome(numOfPosts: number): Promise<Post[]> {
+  if (client) {
+    return (await client.fetch(postsQuery(numOfPosts))) || []
+  }
+  return []
+}
+
+// GET ALL POSTS
 export async function getAllPosts(): Promise<Post[]> {
   if (client) {
-    return (await client.fetch(indexQuery)) || []
+    return (await client.fetch(postsQuery())) || []
+  }
+  return []
+}
+
+// GET QUESTIONS FOR HOME PAGE
+export async function getQuestionsForHome(
+  numOfQuestions: number
+): Promise<Question[]> {
+  if (client) {
+    return (await client.fetch(questionsQuery(numOfQuestions))) || []
+  }
+  return []
+}
+
+// GET ALL QUESTIONS
+export async function getAllQuestions(): Promise<Question[]> {
+  if (client) {
+    return (await client.fetch(questionsQuery())) || []
   }
   return []
 }

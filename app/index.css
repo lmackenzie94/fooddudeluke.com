@@ -1,0 +1,46 @@
+/* TODO: these styles are applying to the studio...(?) */
+
+@tailwind base;
+@tailwind components;
+
+@layer base {
+  /* keeps the scrollbar visible even when not required 
+  prevents content from shifting when changing between page with scroll and page without
+  */
+  html {
+    overflow-y: scroll;
+  }
+
+  body {
+    @apply bg-white pb-8 pt-52 text-black sm:pt-40;
+    background-image: url('/food-bg.webp');
+    background-size: 95;
+  }
+
+  body::-webkit-scrollbar {
+    width: 0.6em;
+  }
+
+  body::-webkit-scrollbar-track {
+    @apply bg-gray-200;
+  }
+
+  body::-webkit-scrollbar-thumb {
+    @apply bg-orange;
+  }
+
+  .h1 {
+    @apply text-xl font-bold leading-tight tracking-tight md:text-3xl;
+  }
+}
+
+@layer components {
+  .button {
+    @apply inline-block rounded-md px-3 py-1;
+  }
+
+  .text-shadow {
+    text-shadow: 0px 0px 0.5px currentcolor;
+  }
+}
+@tailwind utilities;

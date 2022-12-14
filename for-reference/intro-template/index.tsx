@@ -58,7 +58,7 @@ export default memo(function IntroTemplate() {
 
           {!hasEnvFile && (
             <div
-              className="mb-6 rounded-lg bg-yellow-100 p-4 text-sm text-yellow-700"
+              className="text-yellow-700 mb-6 rounded-lg bg-yellow-100 p-4 text-sm"
               role="alert"
             >
               {`It looks like you haven't set up the local environment variables.`}
@@ -67,7 +67,7 @@ export default memo(function IntroTemplate() {
                   href={
                     'https://github.com/sanity-io/nextjs-blog-cms-sanity-v3#step-2-set-up-the-project-locally'
                   }
-                  className={`mx-1 underline hover:text-blue-800`}
+                  className={`mx-1 underline hover:text-blue`}
                   target="_blank"
                   rel="noreferrer"
                 >
@@ -88,7 +88,7 @@ export default memo(function IntroTemplate() {
                   <div className="text-xs text-gray-700">
                     Your Sanity Studio is deployed at
                     <Link
-                      className="mx-1 underline hover:text-blue-800"
+                      className="mx-1 underline hover:text-blue"
                       href={studioURL}
                     >
                       {studioURL}
@@ -97,7 +97,7 @@ export default memo(function IntroTemplate() {
 
                   <div className="mt-3">
                     <Link
-                      className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
+                      className="hover:bg-blue-800 inline-flex rounded bg-blue-500 px-4 py-2 text-white"
                       href={createPostURL}
                     >
                       Go to Sanity Studio
@@ -128,7 +128,7 @@ export default memo(function IntroTemplate() {
                       <div className="text-xs text-gray-700">
                         Your code can be found at
                         <a
-                          className="mx-1 underline hover:text-blue-800"
+                          className="mx-1 underline hover:text-blue"
                           href={repoURL}
                           target="_blank"
                           rel="noreferrer"
@@ -139,7 +139,7 @@ export default memo(function IntroTemplate() {
 
                       <div className="mt-3">
                         <a
-                          className="inline-flex rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-800"
+                          className="hover:bg-blue-800 inline-flex rounded bg-blue-500 px-4 py-2 text-white"
                           href={repoURL}
                           target="_blank"
                           rel="noopener noreferrer"
@@ -216,7 +216,7 @@ function BlueLink({ href, text }: { href: string; text: string }) {
   return (
     <a
       href={href}
-      className="text-blue-500 underline hover:text-blue-800"
+      className="text-blue underline hover:text-blue"
       target="_blank"
       rel="noreferrer"
     >
@@ -226,12 +226,7 @@ function BlueLink({ href, text }: { href: string; text: string }) {
 }
 
 const RemoveBlock = ({ url }) => (
-  <a
-    className="hover:text-blue-800"
-    href={url}
-    target="_blank"
-    rel="noreferrer"
-  >
+  <a className="hover:text-blue" href={url} target="_blank" rel="noreferrer">
     How to remove this block?
   </a>
 )

@@ -1,4 +1,6 @@
-import AlertBanner from 'components/AlertBanner'
+import AlertBanner from 'components/for-reference/AlertBanner'
+
+import Header from './Header'
 
 export default function BlogLayout({
   preview,
@@ -13,6 +15,7 @@ export default function BlogLayout({
     <>
       <div className="min-h-screen">
         <AlertBanner preview={preview} loading={loading} />
+        <Header />
         <main>{children}</main>
       </div>
     </>

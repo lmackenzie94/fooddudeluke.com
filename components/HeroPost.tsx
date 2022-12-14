@@ -1,24 +1,21 @@
-import AuthorAvatar from 'components/AuthorAvatar'
-import CoverImage from 'components/CoverImage'
-import Date from 'components/PostDate'
+import AuthorAvatar from 'components/for-reference/AuthorAvatar'
+import CoverImage from 'components/for-reference/CoverImage'
+import Date from 'components/for-reference/PostDate'
 import type { Post } from 'lib/sanity.queries'
 import Link from 'next/link'
 
 export default function HeroPost(
-  props: Pick<
-    Post,
-    'title' | 'coverImage' | 'date' | 'excerpt' | 'author' | 'slug'
-  >
+  props: Pick<Post, 'title' | 'date' | 'author' | 'slug'>
 ) {
-  const { title, coverImage, date, excerpt, author, slug } = props
+  const { title, date, author, slug } = props
   return (
     <section>
-      <div className="mb-8 md:mb-16">
+      {/* <div className="mb-8 md:mb-16">
         <CoverImage slug={slug} title={title} image={coverImage} priority />
-      </div>
-      <div className="mb-20 md:mb-28 md:grid md:grid-cols-2 md:gap-x-16 lg:gap-x-8">
+      </div> */}
+      <div className="lg:gap-x-8 mb-20 md:mb-28 md:grid md:grid-cols-2 md:gap-x-16">
         <div>
-          <h3 className="mb-4 text-4xl leading-tight lg:text-6xl">
+          <h3 className="lg:text-6xl mb-4 text-4xl leading-tight">
             <Link href={`/posts/${slug}`} className="hover:underline">
               {title || 'Untitled'}
             </Link>
@@ -28,7 +25,6 @@ export default function HeroPost(
           </div>
         </div>
         <div>
-          {excerpt && <p className="mb-4 text-lg leading-relaxed">{excerpt}</p>}
           {author && (
             <AuthorAvatar name={author.name} picture={author.picture} />
           )}

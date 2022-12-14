@@ -8,36 +8,59 @@ module.exports = {
     './plugins/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    extend: {
-      colors: {
-        'accent-1': '#FAFAFA',
-        'accent-2': '#EAEAEA',
-        'accent-7': '#333',
-        success: '#0070f3',
-        cyan: '#79FFE1',
-        'blue-500': '#2276FC',
-        'yellow-100': '#fef7da',
-      },
-      spacing: {
-        28: '7rem',
-      },
-      letterSpacing: {
-        tighter: '-.04em',
-      },
-      lineHeight: {
-        tight: 1.2,
-      },
-      fontSize: {
-        '5xl': '2.5rem',
-        '6xl': '2.75rem',
-        '7xl': '4.5rem',
-        '8xl': '6.25rem',
-      },
-      boxShadow: {
-        small: '0 5px 10px rgba(0, 0, 0, 0.12)',
-        medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+    screens: {
+      sm: '38em',
+      // => @media (min-width: 640px) { ... }
+
+      md: '55em',
+      // => @media (min-width: 1024px) { ... }
+
+      // lg: '60em',
+      // => @media (min-width: 1280px) { ... }
+    },
+    container: {
+      center: true,
+      padding: '1rem',
+    },
+    colors: {
+      white: '#fbfbfb',
+      black: '#393939',
+      green: '#12492f',
+      blue: '#3b38ab',
+      orange: '#D5370B',
+      yellow: '#F7A222',
+      gray: {
+        100: '#f3f4f6',
+        200: '#e5e7eb',
+        500: '#6b7280',
+        700: '#374151',
       },
     },
+    extend: {
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            blockquote: {
+              backgroundColor: theme('colors.white'),
+              fontStyle: 'normal',
+              fontWeight: 'normal',
+              padding: '1rem',
+              borderColor: theme('colors.yellow'),
+              boxShadow: '0px 3px 12px 0px rgba(166,166,166,0.2)',
+              strong: {
+                color: theme('colors.black'),
+                fontSize: '1.1rem',
+                fontWeight: '700',
+              },
+              ul: {
+                marginTop: '0.5rem',
+                marginBottom: '0',
+              },
+            },
+          },
+        },
+      }),
+    },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 }

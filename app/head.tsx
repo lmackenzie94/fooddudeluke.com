@@ -1,5 +1,5 @@
-import BlogMeta from 'components/BlogMeta'
-import MetaDescription from 'components/MetaDescription'
+import BlogMeta from 'components/for-reference/BlogMeta'
+import MetaDescription from 'components/for-reference/MetaDescription'
 import * as demo from 'lib/demo.data'
 import { getSettings } from 'lib/sanity.client'
 

@@ -4,14 +4,24 @@ import IndexPage from 'components/IndexPage'
 import { usePreview } from 'lib/sanity.preview'
 import {
   type Post,
+  type Question,
   type Settings,
-  indexQuery,
+  postsQuery,
+  questionsQuery,
   settingsQuery,
 } from 'lib/sanity.queries'
 
 export default function PreviewIndexPage({ token }: { token: null | string }) {
-  const posts: Post[] = usePreview(token, indexQuery) || []
+  const posts: Post[] = usePreview(token, postsQuery()) || []
+  const questions: Question[] = usePreview(token, questionsQuery()) || []
   const settings: Settings = usePreview(token, settingsQuery) || {}
 
-  return <IndexPage preview posts={posts} settings={settings} />
+  return (
+    <IndexPage
+      preview
+      posts={posts}
+      questions={questions}
+      settings={settings}
+    />
+  )
 }

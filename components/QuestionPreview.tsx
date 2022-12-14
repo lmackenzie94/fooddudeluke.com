@@ -1,23 +1,23 @@
-import type { Post } from 'lib/sanity.queries'
+import type { Question } from 'lib/sanity.queries'
 import { formatTitle } from 'lib/utils/formatTitle'
 import Link from 'next/link'
 
-import styles from './PostPreview.module.scss'
+import styles from './QuestionPreview.module.scss'
 
-export default function PostPreview({
+export default function QuestionPreview({
   index,
-  post,
+  question,
 }: {
   index: number
-  post: Post
+  question: Question
 }) {
-  const { title, slug, categories } = post
+  const { title, slug, categories } = question
 
   return (
     <Link
-      href={`/posts/${slug}`}
+      href={`/questions/${slug}`}
       data-test="item-preview"
-      className={`${styles.postLink} mb-2 flex items-center justify-between border-x-4 bg-gray-100 px-3 py-2 md:px-4`}
+      className={`${styles.questionLink} mb-2 flex items-center justify-between border-x-4 bg-gray-100 px-3 py-2 md:px-4`}
     >
       <article className="flex items-center justify-between w-full">
         <h3

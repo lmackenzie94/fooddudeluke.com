@@ -1,41 +1,58 @@
-import Container from 'components/BlogContainer'
-import BlogHeader from 'components/BlogHeader'
 import Layout from 'components/BlogLayout'
-import HeroPost from 'components/HeroPost'
+import Container from 'components/Container'
 import MoreStories from 'components/MoreStories'
-import IntroTemplate from 'intro-template'
-import * as demo from 'lib/demo.data'
-import type { Post, Settings } from 'lib/sanity.queries'
+import PostsList from 'components/PostsList'
+import type { Post, Question, Settings } from 'lib/sanity.queries'
+import Link from 'next/link'
+
+import QuestionsList from './QuestionsList'
 
 export default function IndexPage(props: {
   preview?: boolean
   loading?: boolean
   posts: Post[]
+  questions: Question[]
   settings: Settings
 }) {
-  const { preview, loading, posts, settings } = props
-  const [heroPost, ...morePosts] = posts || []
-  const { title = demo.title, description = demo.description } = settings || {}
+  const { preview, loading, posts, questions, settings } = props
+  // const { title, description } = settings || {}
 
   return (
-    <>
-      <Layout preview={preview} loading={loading}>
-        <Container>
-          <BlogHeader title={title} description={description} level={1} />
-          {heroPost && (
-            <HeroPost
-              title={heroPost.title}
-              coverImage={heroPost.coverImage}
-              date={heroPost.date}
-              author={heroPost.author}
-              slug={heroPost.slug}
-              excerpt={heroPost.excerpt}
-            />
-          )}
-          {morePosts.length > 0 && <MoreStories posts={morePosts} />}
-        </Container>
-        <IntroTemplate />
-      </Layout>
-    </>
+    <Layout preview={preview} loading={loading}>
+      <Container>
+        {/* <BlogHeader title={title} description={description} level={1} /> */}
+
+        {/* <ListHeader heading="Recent Posts." type="posts" btnColor="bg-blue" /> */}
+        <PostsList posts={posts} />
+
+        {/* Recent Questions */}
+        {/* <ListHeader
+          heading="Recent Questions."
+          type="questions"
+          btnColor="bg-green"
+        /> */}
+        <QuestionsList questions={questions} />
+      </Container>
+    </Layout>
   )
 }
+
+const ListHeader = ({
+  heading,
+  type,
+  btnColor,
+}: {
+  heading: string
+  type: 'posts' | 'questions'
+  btnColor: string
+}) => (
+  <div className="flex items-center justify-between mb-4 md:mb-6">
+    <h2 className="h1">{heading}</h2>
+    <Link
+      href={`/${type}`}
+      className={`button ml-4 inline-block text-xs text-white ${btnColor}`}
+    >
+      see all.
+    </Link>
+  </div>
+)

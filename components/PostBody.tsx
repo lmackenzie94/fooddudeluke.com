@@ -7,14 +7,38 @@
  * https://portabletext.org/
  *
  */
+
 import { PortableText } from '@portabletext/react'
 
-import styles from './PostBody.module.css'
+let numOfHighlights = 0
 
+const myPortableTextComponents: {
+  marks: {
+    highlight: ({ children }: { children: React.ReactNode }) => JSX.Element
+    // tldr: ({ children }: { children: React.ReactNode }) => JSX.Element
+  }
+} = {
+  marks: {
+    highlight: ({ children }) => {
+      numOfHighlights++
+
+      const highlightColor =
+        numOfHighlights % 4 === 0
+          ? 'bg-blue/20'
+          : numOfHighlights % 3 === 0
+          ? 'bg-yellow/20'
+          : numOfHighlights % 2 === 0
+          ? 'bg-green/20'
+          : 'bg-orange/20'
+      return (
+        <span className={`p-1 ${highlightColor} text-black`}>{children}</span>
+      )
+    },
+    // tldr: ({ children }) => {
+    //   console.log('TLDR', children)
+    // },
+  },
+}
 export default function PostBody({ content }) {
-  return (
-    <div className={`mx-auto max-w-2xl ${styles.portableText}`}>
-      <PortableText value={content} />
-    </div>
-  )
+  return <PortableText value={content} components={myPortableTextComponents} />
 }

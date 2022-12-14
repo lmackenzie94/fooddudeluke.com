@@ -1,0 +1,39 @@
+.postLink {
+  @apply transition-colors duration-200;
+
+  h3 span {
+    @apply font-semibold;
+  }
+
+  &:nth-child(4n + 1) {
+    @apply border-blue hover:bg-blue/10;
+
+    h3 span {
+      @apply text-blue;
+    }
+  }
+
+  &:nth-child(4n + 2) {
+    @apply border-green hover:bg-green/10;
+
+    h3 span {
+      @apply text-green;
+    }
+  }
+
+  &:nth-child(4n + 3) {
+    @apply border-yellow hover:bg-yellow/10;
+
+    h3 span {
+      @apply text-yellow;
+    }
+  }
+
+  &:nth-child(4n + 4) {
+    @apply border-orange hover:bg-orange/10;
+
+    h3 span {
+      @apply text-orange;
+    }
+  }
+}
