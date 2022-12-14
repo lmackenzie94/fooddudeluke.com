@@ -1,11 +1,11 @@
 import PreviewIndexPage from 'components/for-reference/PreviewIndexPage'
 import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
 import QuestionsPage from 'components/QuestionsPage'
-import { getAllQuestions } from 'lib/sanity.client'
+import { getQuestions } from 'lib/sanity.client'
 import { previewData } from 'next/headers'
 
 export default async function QuestionsRoute() {
-  const questions = await getAllQuestions()
+  const questions = await getQuestions()
 
   if (previewData()) {
     const token = previewData().token || null

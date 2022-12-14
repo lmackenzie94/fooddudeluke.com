@@ -1,19 +1,15 @@
 import PreviewIndexPage from 'components/for-reference/PreviewIndexPage'
 import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
 import IndexPage from 'components/IndexPage'
-import {
-  getPostsForHome,
-  getQuestionsForHome,
-  getSettings,
-} from 'lib/sanity.client'
+import { getPosts, getQuestions, getSettings } from 'lib/sanity.client'
 import { previewData } from 'next/headers'
 
 export default async function IndexRoute() {
   // Fetch queries in parallel
   const [settings, posts, questions] = await Promise.all([
     getSettings(),
-    getPostsForHome(5),
-    getQuestionsForHome(5),
+    getPosts(5),
+    getQuestions(5),
   ])
 
   if (previewData()) {

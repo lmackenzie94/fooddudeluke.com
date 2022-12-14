@@ -3,7 +3,7 @@
 import PostPage from 'components/PostPage'
 import { usePreview } from 'lib/sanity.preview'
 import {
-  postAndMoreStoriesQuery,
+  postAndMorePostsQuery,
   settingsQuery,
   type Post,
   type Settings,
@@ -18,7 +18,7 @@ export default function PreviewPostPage({
 }) {
   const data: { post: Post; morePosts: Post[] } = usePreview(
     token,
-    postAndMoreStoriesQuery,
+    postAndMorePostsQuery,
     {
       slug,
     }

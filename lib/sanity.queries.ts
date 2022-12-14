@@ -1,6 +1,6 @@
 import { groq } from 'next-sanity'
 
-// queries
+// FIELDS --------------------------------------------------------------------------------------------------------------
 
 const postFields = groq`
   _id,
@@ -24,14 +24,12 @@ const questionFields = groq`
   body
 `
 
+// SETTINGS --------------------------------------------------------------------------------------------------------------
+
 export const settingsQuery = groq`*[_type == "settings"][0]`
 
-export const indexQuery = groq`
-*[_type == "post"] | order(date desc, _updatedAt desc) {
-  ${postFields}
-}`
+// POSTS -----------------------------------------------------------------------------------------------------------------
 
-// get 5 most recent Posts
 export const postsQuery = (numOfPosts?: number) => {
   const baseQuery = `*[_type == "post"] | order(date desc, _updatedAt desc)`
 
@@ -42,18 +40,7 @@ export const postsQuery = (numOfPosts?: number) => {
   `
 }
 
-// get 5 most recent Questions
-export const questionsQuery = (numOfQuestions?: number) => {
-  const baseQuery = `*[_type == "question"] | order(date desc, _updatedAt desc)`
-
-  return groq`
-   ${baseQuery} ${numOfQuestions ? `[0...${numOfQuestions}]` : ''} {
-    ${questionFields}
-  }
-  `
-}
-
-export const postAndMoreStoriesQuery = groq`
+export const postAndMorePostsQuery = groq`
 {
   "post": *[_type == "post" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
@@ -65,7 +52,29 @@ export const postAndMoreStoriesQuery = groq`
   }
 }`
 
-export const questionAndMoreStoriesQuery = groq`
+export const postSlugsQuery = groq`
+*[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const postBySlugQuery = groq`
+*[_type == "post" && slug.current == $slug][0] {
+  ${postFields}
+}
+`
+
+// QUESTIONS --------------------------------------------------------------------------------------------------------------
+
+export const questionsQuery = (numOfQuestions?: number) => {
+  const baseQuery = `*[_type == "question"] | order(date desc, _updatedAt desc)`
+
+  return groq`
+   ${baseQuery} ${numOfQuestions ? `[0...${numOfQuestions}]` : ''} {
+    ${questionFields}
+  }
+  `
+}
+
+export const questionAndMoreQuestionsQuery = groq`
 {
   "question": *[_type == "question" && slug.current == $slug] | order(_updatedAt desc) [0] {
     content,
@@ -77,18 +86,8 @@ export const questionAndMoreStoriesQuery = groq`
   }
 }`
 
-export const postSlugsQuery = groq`
-*[_type == "post" && defined(slug.current)][].slug.current
-`
-
 export const questionSlugsQuery = groq`
 *[_type == "question" && defined(slug.current)][].slug.current
-`
-
-export const postBySlugQuery = groq`
-*[_type == "post" && slug.current == $slug][0] {
-  ${postFields}
-}
 `
 
 export const questionBySlugQuery = groq`
@@ -97,7 +96,7 @@ export const questionBySlugQuery = groq`
 }
 `
 
-// interfaces
+// INTERFACES --------------------------------------------------------------------------------------------------------------
 
 export interface Author {
   name?: string
