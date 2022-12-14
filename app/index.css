@@ -13,8 +13,8 @@
 
   body {
     @apply bg-white pb-8 pt-52 text-black sm:pt-40;
-    background-image: url('/food-bg.webp');
-    background-size: 95;
+    /* background-image: url('/food-bg.webp');
+    background-size: 95%; */
   }
 
   body::-webkit-scrollbar {
