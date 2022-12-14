@@ -15,10 +15,10 @@ export default function Header({ titleTag = 'h2' }) {
       title: 'questions.',
       href: '/questions',
     },
-    {
-      title: 'my food.',
-      href: '/my-food',
-    },
+    // {
+    //   title: 'my food.',
+    //   href: '/my-food',
+    // },
   ]
 
   const currentPath = usePathname()
@@ -34,7 +34,7 @@ export default function Header({ titleTag = 'h2' }) {
             <Logo />
           </Tag>
         </Link>
-        {/* <nav>
+        <nav>
           <ul className="flex gap-x-6">
             {navItems.map((item) => (
               <li key={item.href}>
@@ -51,7 +51,7 @@ export default function Header({ titleTag = 'h2' }) {
               </li>
             ))}
           </ul>
-        </nav> */}
+        </nav>
       </div>
     </header>
   )

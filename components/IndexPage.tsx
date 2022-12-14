@@ -22,15 +22,15 @@ export default function IndexPage(props: {
       <Container>
         {/* <BlogHeader title={title} description={description} level={1} /> */}
 
-        {/* <ListHeader heading="Recent Posts." type="posts" btnColor="bg-blue" /> */}
+        <ListHeader heading="Recent Posts." type="posts" btnColor="bg-blue" />
         <PostsList posts={posts} />
 
         {/* Recent Questions */}
-        {/* <ListHeader
+        <ListHeader
           heading="Recent Questions."
           type="questions"
           btnColor="bg-green"
-        /> */}
+        />
         <QuestionsList questions={questions} />
       </Container>
     </Layout>

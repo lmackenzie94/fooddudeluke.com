@@ -1,20 +1,19 @@
 import BlogMeta from 'components/for-reference/BlogMeta'
 import * as demo from 'lib/demo.data'
-import { getPostBySlug, getSettings } from 'lib/sanity.client'
-import { urlForImage } from 'lib/sanity.image'
+import { getQuestionBySlug, getSettings } from 'lib/sanity.client'
 
 export default async function SlugHead({
   params,
 }: {
   params: { slug: string }
 }) {
-  const [{ title = demo.title }, post] = await Promise.all([
+  const [{ title = demo.title }, question] = await Promise.all([
     getSettings(),
-    getPostBySlug(params.slug),
+    getQuestionBySlug(params.slug),
   ])
   return (
     <>
-      <title>{post.title ? `${post.title} | ${title}` : title}</title>
+      <title>{question.title ? `${question.title} | ${title}` : title}</title>
       <BlogMeta />
       {/* {post.coverImage?.asset?._ref && (
         <meta

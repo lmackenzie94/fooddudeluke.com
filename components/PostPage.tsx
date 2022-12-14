@@ -1,8 +1,6 @@
+import Layout from 'components/BlogLayout'
 import Container from 'components/Container'
 import PostTitle from 'components/for-reference/PostTitle'
-import SectionSeparator from 'components/for-reference/SectionSeparator'
-import Layout from 'components/BlogLayout'
-import MoreStories from 'components/MoreStories'
 import PostBody from 'components/PostBody'
 import * as demo from 'lib/demo.data'
 import type { Post, Settings } from 'lib/sanity.queries'
@@ -32,7 +30,7 @@ export default function PostPage(props: {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="prose prose-sm prose-h1:text-2xl prose-h2:text-lg md:prose-base">
+            <article className="prose-sm prose prose-h1:text-2xl prose-h2:text-lg md:prose-base">
               {/* <Head>
               <title>{title}</title>
               {post.socialImageURL && (

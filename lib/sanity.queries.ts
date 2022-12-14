@@ -65,13 +65,35 @@ export const postAndMoreStoriesQuery = groq`
   }
 }`
 
+export const questionAndMoreStoriesQuery = groq`
+{
+  "question": *[_type == "question" && slug.current == $slug] | order(_updatedAt desc) [0] {
+    content,
+    ${questionFields}
+  },
+  "moreQuestions": *[_type == "question" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+    content,
+    ${questionFields}
+  }
+}`
+
 export const postSlugsQuery = groq`
 *[_type == "post" && defined(slug.current)][].slug.current
+`
+
+export const questionSlugsQuery = groq`
+*[_type == "question" && defined(slug.current)][].slug.current
 `
 
 export const postBySlugQuery = groq`
 *[_type == "post" && slug.current == $slug][0] {
   ${postFields}
+}
+`
+
+export const questionBySlugQuery = groq`
+*[_type == "question" && slug.current == $slug][0] {
+  ${questionFields}
 }
 `
 
