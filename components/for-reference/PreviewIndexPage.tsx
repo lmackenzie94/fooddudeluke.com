@@ -1,6 +1,6 @@
 'use client'
 
-import IndexPage from 'components/IndexPage'
+import HomePage from 'components/HomePage'
 import { usePreview } from 'lib/sanity.preview'
 import {
   type Post,
@@ -17,7 +17,7 @@ export default function PreviewIndexPage({ token }: { token: null | string }) {
   const settings: Settings = usePreview(token, settingsQuery) || {}
 
   return (
-    <IndexPage
+    <HomePage
       preview
       posts={posts}
       questions={questions}

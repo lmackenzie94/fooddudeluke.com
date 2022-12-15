@@ -1,9 +1,9 @@
 import PreviewPostPage from 'components/for-reference/PreviewPostPage'
 import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
-import QuestionPage from 'components/QuestionPage'
+import SingleQuestionPage from 'components/question/SingleQuestionPage'
 import {
   getAllQuestionsSlugs,
-  getQuestionAndMoreStories,
+  getQuestionAndMoreQuestions,
   getSettings,
 } from 'lib/sanity.client'
 import { previewData } from 'next/headers'
@@ -22,11 +22,11 @@ export default async function SlugRoute({
 
   if (previewData()) {
     const token = previewData().token || null
-    const data = getQuestionAndMoreStories(params.slug, token)
+    const data = getQuestionAndMoreQuestions(params.slug, token)
     return (
       <PreviewSuspense
         fallback={
-          <QuestionPage
+          <SingleQuestionPage
             loading
             preview
             data={await data}
@@ -39,8 +39,8 @@ export default async function SlugRoute({
     )
   }
 
-  const data = getQuestionAndMoreStories(params.slug)
-  return <QuestionPage data={await data} settings={await settings} />
+  const data = getQuestionAndMoreQuestions(params.slug)
+  return <SingleQuestionPage data={await data} settings={await settings} />
 }
 
 // FIXME: remove the `revalidate` export below once you've followed the instructions in `/pages/api/revalidate.ts`

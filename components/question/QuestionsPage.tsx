@@ -1,7 +1,6 @@
 import Container from 'components/Container'
 import Layout from 'components/Layout'
-import MoreStories from 'components/MoreStories'
-import QuestionsList from 'components/QuestionsList'
+import QuestionsList from 'components/question/QuestionsList'
 import type { Question } from 'lib/sanity.queries'
 
 export default function QuestionsPage(props: {
@@ -15,7 +14,7 @@ export default function QuestionsPage(props: {
   return (
     <Layout preview={preview} loading={loading}>
       <Container>
-        <h1 className="h1 mb-4 md:mb-6">All Questions.</h1>
+        <h1 className="mb-4 h1 md:mb-6">All Questions.</h1>
         <QuestionsList questions={questions} />
       </Container>
     </Layout>

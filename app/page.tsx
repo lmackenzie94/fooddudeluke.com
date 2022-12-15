@@ -1,6 +1,6 @@
 import PreviewIndexPage from 'components/for-reference/PreviewIndexPage'
 import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
-import IndexPage from 'components/IndexPage'
+import HomePage from 'components/HomePage'
 import { getPosts, getQuestions, getSettings } from 'lib/sanity.client'
 import { previewData } from 'next/headers'
 
@@ -18,7 +18,7 @@ export default async function IndexRoute() {
     return (
       <PreviewSuspense
         fallback={
-          <IndexPage
+          <HomePage
             loading
             preview
             posts={posts}
@@ -32,7 +32,7 @@ export default async function IndexRoute() {
     )
   }
 
-  return <IndexPage posts={posts} questions={questions} settings={settings} />
+  return <HomePage posts={posts} questions={questions} settings={settings} />
 }
 
 // FIXME: remove the `revalidate` export below once you've followed the instructions in `/pages/api/revalidate.ts`

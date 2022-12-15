@@ -2,7 +2,7 @@ import PostPreview from 'components/for-reference/PostPreview'
 import type { Question } from 'lib/sanity.queries'
 
 export default function MoreStories({ questions }: { questions: Question[] }) {
-  console.log('questions', questions)
+
   return (
     <section>
       <h2 className="mb-8 text-6xl font-bold leading-tight tracking-tighter md:text-7xl">

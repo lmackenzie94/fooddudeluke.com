@@ -1,13 +1,11 @@
 import Container from 'components/Container'
 import Layout from 'components/Layout'
-import MoreStories from 'components/MoreStories'
-import PostsList from 'components/PostsList'
+import PostsList from 'components/post/PostsList'
+import QuestionsList from 'components/question/QuestionsList'
 import type { Post, Question, Settings } from 'lib/sanity.queries'
 import Link from 'next/link'
 
-import QuestionsList from './QuestionsList'
-
-export default function IndexPage(props: {
+export default function HomePage(props: {
   preview?: boolean
   loading?: boolean
   posts: Post[]
@@ -46,7 +44,7 @@ const ListHeader = ({
   type: 'posts' | 'questions'
   btnColor: string
 }) => (
-  <div className="mb-4 flex items-center justify-between md:mb-6">
+  <div className="flex items-center justify-between mb-4 md:mb-6">
     <h2 className="h1">{heading}</h2>
     <Link
       href={`/${type}`}

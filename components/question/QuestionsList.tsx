@@ -1,4 +1,4 @@
-import QuestionPreview from 'components/QuestionPreview'
+import QuestionPreview from 'components/question/QuestionPreview'
 import type { Question } from 'lib/sanity.queries'
 
 export default function QuestionsList({

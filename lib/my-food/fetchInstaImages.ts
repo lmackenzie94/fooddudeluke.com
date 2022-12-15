@@ -8,6 +8,8 @@ export interface Image {
 }
 
 // REMEMBER: Instagram account must be public
+// https://rapidapi.com/neotank/api/instagram130
+// 100 requests per month (max 30/min)
 const headers = {
   'X-RapidAPI-Host': 'instagram130.p.rapidapi.com',
   'X-RapidAPI-Key': process.env.INSTA_API_KEY,

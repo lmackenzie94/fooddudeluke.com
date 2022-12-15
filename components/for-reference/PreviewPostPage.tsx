@@ -1,12 +1,12 @@
 'use client'
 
-import PostPage from 'components/PostPage'
+import PostPage from 'components/post/SinglePostPage'
 import { usePreview } from 'lib/sanity.preview'
 import {
-  postAndMorePostsQuery,
-  settingsQuery,
   type Post,
   type Settings,
+  postAndMorePostsQuery,
+  settingsQuery,
 } from 'lib/sanity.queries'
 
 export default function PreviewPostPage({

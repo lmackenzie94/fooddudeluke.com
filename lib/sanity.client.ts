@@ -56,7 +56,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   return {} as any
 }
 
-export async function getPostAndMoreStories(
+export async function getPostAndMorePosts(
   slug: string,
   token?: string | null
 ): Promise<{ post: Post; morePosts: Post[] }> {
@@ -101,7 +101,7 @@ export async function getQuestionBySlug(slug: string): Promise<Question> {
   return {} as any
 }
 
-export async function getQuestionAndMoreStories(
+export async function getQuestionAndMoreQuestions(
   slug: string,
   token?: string | null
 ): Promise<{ question: Question; moreQuestions: Question[] }> {
