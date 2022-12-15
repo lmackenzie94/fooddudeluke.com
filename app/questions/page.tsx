@@ -22,5 +22,5 @@ export default async function QuestionsRoute() {
   return <QuestionsPage questions={questions} />
 }
 
-// FIXME: remove the `revalidate` export below once you've followed the instructions in `/pages/api/revalidate.ts`
-export const revalidate = 1
+// REMEMBER: don't need "revalidate" because our `/pages/api/revalidate.ts` route + Sanity Webhook will handle revalidation
+// export const revalidate = 1

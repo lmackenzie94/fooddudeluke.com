@@ -1,5 +1,5 @@
 /**
- * This code is responsible for revalidating the cache when a post or author is updated.
+ * This code is responsible for revalidating the cache when a post or question is updated.
  *
  * It is set up to receive a validated GROQ-powered Webhook from Sanity.io:
  * https://www.sanity.io/docs/webhooks
@@ -8,7 +8,7 @@
  * 2. Click "Create webhook"
  * 3. Set the URL to https://YOUR_NEXTJS_SITE_URL/api/revalidate
  * 4. Trigger on: "Create", "Update", and "Delete"
- * 5. Filter: _type == "post" || _type == "author" || _type == "settings"
+ * 5. Filter: _type == "post" || _type == "question" || _type == "settings"
  * 6. Projection: Leave empty
  * 7. HTTP method: POST
  * 8. API version: v2021-03-25
@@ -19,6 +19,8 @@
  * 13. Add the secret to Vercel: `npx vercel env add SANITY_REVALIDATE_SECRET`
  * 14. Redeploy with `npx vercel --prod` to apply the new environment variable
  */
+
+// This has the same effect as Server-Side Rendering (SSR) - i.e. no revalidation time = no stale content
 
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
@@ -60,7 +62,12 @@ export default async function revalidate(
   }
 }
 
-type StaleRoute = '/' | `/posts/${string}`
+type StaleRoute =
+  | '/'
+  | `/posts`
+  | `/questions`
+  | `/posts/${string}`
+  | `/questions/${string}`
 
 async function queryStaleRoutes(
   body: Pick<ParseBody['body'], '_type' | '_id' | 'date' | 'slug'>
@@ -68,31 +75,36 @@ async function queryStaleRoutes(
   const client = createClient({ projectId, dataset, apiVersion, useCdn: false })
 
   // Handle possible deletions
-  if (body._type === 'post') {
+  if (body._type === 'post' || body._type === 'question') {
     const exists = await client.fetch(groq`*[_id == $id][0]`, { id: body._id })
     if (!exists) {
       let staleRoutes: StaleRoute[] = ['/']
       if ((body.slug as any)?.current) {
-        staleRoutes.push(`/posts/${(body.slug as any).current}`)
+        staleRoutes.push(`/${body._type}s/${(body.slug as any).current}`)
       }
       // Assume that the post document was deleted. Query the datetime used to sort "More stories" to determine if the post was in the list.
       const moreStories = await client.fetch(
         groq`count(
-          *[_type == "post"] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
+          *[_type == body._type] | order(date desc, _updatedAt desc) [0...3] [dateTime(date) > dateTime($date)]
         )`,
         { date: body.date }
       )
       // If there's less than 3 posts with a newer date, we need to revalidate everything
       if (moreStories < 3) {
-        return [...new Set([...(await queryAllRoutes(client)), ...staleRoutes])]
+        return [
+          ...new Set([
+            ...(await queryAllRoutes(client, body._type)),
+            ...staleRoutes,
+          ]),
+        ]
       }
       return staleRoutes
     }
   }
 
   switch (body._type) {
-    case 'author':
-      return await queryStaleAuthorRoutes(client, body._id)
+    case 'question':
+      return await queryStaleQuestionRoutes(client, body._id)
     case 'post':
       return await queryStalePostRoutes(client, body._id)
     case 'settings':
@@ -102,48 +114,53 @@ async function queryStaleRoutes(
   }
 }
 
-async function _queryAllRoutes(client: SanityClient): Promise<string[]> {
-  return await client.fetch(groq`*[_type == "post"].slug.current`)
+async function _queryAllRoutes(
+  client: SanityClient,
+  type?: 'post' | 'question'
+): Promise<string[]> {
+  if (type) {
+    return await client.fetch(groq`*[_type == type].slug.current`)
+  }
+
+  return await client.fetch(
+    groq`*[_type == "post" || _type == "question"].slug.current`
+  )
 }
 
-async function queryAllRoutes(client: SanityClient): Promise<StaleRoute[]> {
-  const slugs = await _queryAllRoutes(client)
+async function queryAllRoutes(
+  client: SanityClient,
+  type?: 'post' | 'question'
+): Promise<StaleRoute[]> {
+  let slugs = []
 
-  return ['/', ...slugs.map((slug) => `/posts/${slug}` as StaleRoute)]
+  if (type) {
+    slugs = await _queryAllRoutes(client, type)
+  } else {
+    slugs = await _queryAllRoutes(client)
+  }
+
+  return [
+    '/',
+    '/posts',
+    '/questions',
+    ...slugs.map((slug) => `/${type}s/${slug}` as StaleRoute),
+  ]
 }
 
 async function mergeWithMoreStories(
   client,
-  slugs: string[]
+  slugs: string[],
+  type: 'post' | 'question'
 ): Promise<string[]> {
   const moreStories = await client.fetch(
-    groq`*[_type == "post"] | order(date desc, _updatedAt desc) [0...3].slug.current`
+    groq`*[_type == type] | order(date desc, _updatedAt desc) [0...3].slug.current`
   )
   if (slugs.some((slug) => moreStories.includes(slug))) {
-    const allSlugs = await _queryAllRoutes(client)
+    const allSlugs = await _queryAllRoutes(client, type)
     return [...new Set([...slugs, ...allSlugs])]
   }
 
   return slugs
-}
-
-async function queryStaleAuthorRoutes(
-  client: SanityClient,
-  id: string
-): Promise<StaleRoute[]> {
-  let slugs = await client.fetch(
-    groq`*[_type == "author" && _id == $id] {
-    "slug": *[_type == "post" && references(^._id)].slug.current
-  }["slug"][]`,
-    { id }
-  )
-
-  if (slugs.length > 0) {
-    slugs = await mergeWithMoreStories(client, slugs)
-    return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
-  }
-
-  return []
 }
 
 async function queryStalePostRoutes(
@@ -155,7 +172,21 @@ async function queryStalePostRoutes(
     { id }
   )
 
-  slugs = await mergeWithMoreStories(client, slugs)
+  slugs = await mergeWithMoreStories(client, slugs, 'post')
 
   return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
+}
+
+async function queryStaleQuestionRoutes(
+  client: SanityClient,
+  id: string
+): Promise<StaleRoute[]> {
+  let slugs = await client.fetch(
+    groq`*[_type == "question" && _id == $id].slug.current`,
+    { id }
+  )
+
+  slugs = await mergeWithMoreStories(client, slugs, 'question')
+
+  return ['/', ...slugs.map((slug) => `/questions/${slug}`)]
 }
