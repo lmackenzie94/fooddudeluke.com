@@ -180,7 +180,7 @@ async function queryStalePostRoutes(
 
   slugs = await mergeWithMoreStories(client, slugs, 'post')
 
-  return ['/', ...slugs.map((slug) => `/posts/${slug}`)]
+  return ['/', '/posts', ...slugs.map((slug) => `/posts/${slug}`)]
 }
 
 async function queryStaleQuestionRoutes(
@@ -194,5 +194,5 @@ async function queryStaleQuestionRoutes(
 
   slugs = await mergeWithMoreStories(client, slugs, 'question')
 
-  return ['/', ...slugs.map((slug) => `/questions/${slug}`)]
+  return ['/', '/questions', ...slugs.map((slug) => `/questions/${slug}`)]
 }
