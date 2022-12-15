@@ -1,10 +1,22 @@
 // doesn't work if you include the .ts extension
+import type { NextApiRequest, NextApiResponse } from 'next'
+
 import { fetchMostRecentImages } from '../../lib/my-food/fetchInstaImages'
 import { uploadImages } from '../../lib/my-food/uploadImagesToCloudinary'
 
 // TODO: properly type this
 
-export default async function handler(req: any, res: any) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  // authorizing the request using secret query param
+  // TODO: do this properly (JWT?)
+  if (req.query.s !== process.env.MY_SECRET) {
+    res.status(401).json({ message: 'Not today!' })
+    return
+  }
+
   const imagesToFetch: number = +req.query.num || 1
 
   try {

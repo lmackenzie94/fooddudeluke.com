@@ -1,8 +1,6 @@
 import { v2 as cloudinary } from 'cloudinary' // TODO: should this be a regular dependency?
 
 import { type Image } from './fetchInstaImages'
-// import dotenv from 'dotenv'
-// dotenv.config()
 
 const OPTIONS = {
   folder: 'food-dude-luke',

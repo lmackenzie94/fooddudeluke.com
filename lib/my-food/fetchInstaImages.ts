@@ -1,6 +1,4 @@
 import fetch from 'node-fetch' // TODO: need this..?
-// import dotenv from 'dotenv' // TODO: delete
-// dotenv.config()
 
 export interface Image {
   id: string
