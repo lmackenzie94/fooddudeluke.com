@@ -122,9 +122,15 @@ async function _queryAllRoutes(
     return await client.fetch(groq`*[_type == type].slug.current`)
   }
 
-  return await client.fetch(
-    groq`*[_type == "post" || _type == "question"].slug.current`
+  const postSlugs = await client.fetch(groq`*[_type == "post"].slug.current`)
+  const questionSlugs = await client.fetch(
+    groq`*[_type == "question"].slug.current`
   )
+
+  return [
+    ...postSlugs.map((slug) => `/posts/${slug}`),
+    ...questionSlugs.map((slug) => `/questions/${slug}`),
+  ]
 }
 
 async function queryAllRoutes(
@@ -135,16 +141,16 @@ async function queryAllRoutes(
 
   if (type) {
     slugs = await _queryAllRoutes(client, type)
+    return [
+      '/',
+      '/posts',
+      '/questions',
+      ...slugs.map((slug) => `/${type}s/${slug}` as StaleRoute),
+    ]
   } else {
     slugs = await _queryAllRoutes(client)
+    return ['/', '/posts', '/questions', ...slugs]
   }
-
-  return [
-    '/',
-    '/posts',
-    '/questions',
-    ...slugs.map((slug) => `/${type}s/${slug}` as StaleRoute),
-  ]
 }
 
 async function mergeWithMoreStories(
