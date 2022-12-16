@@ -2,17 +2,21 @@ import Container from 'components/Container'
 import Layout from 'components/Layout'
 import PostsList from 'components/post/PostsList'
 import QuestionsList from 'components/question/QuestionsList'
+import type { FoodImage } from 'lib/my-food/cloudinary'
 import type { Post, Question, Settings } from 'lib/sanity.queries'
 import Link from 'next/link'
+
+import ImageGrid from './ImageGrid'
 
 export default function HomePage(props: {
   preview?: boolean
   loading?: boolean
   posts: Post[]
   questions: Question[]
+  food: FoodImage[]
   settings: Settings
 }) {
-  const { preview, loading, posts, questions, settings } = props
+  const { preview, loading, posts, questions, food, settings } = props
   // const { title, description } = settings || {}
 
   return (
@@ -20,6 +24,7 @@ export default function HomePage(props: {
       <Container>
         {/* <BlogHeader title={title} description={description} level={1} /> */}
 
+        {/* Recent Posts */}
         <ListHeader heading="Recent Posts." type="posts" btnColor="bg-blue" />
         <PostsList posts={posts} />
 
@@ -30,6 +35,10 @@ export default function HomePage(props: {
           btnColor="bg-green"
         />
         <QuestionsList questions={questions} />
+
+        {/* Recent Food */}
+        <ListHeader heading="Recent Food." type="food" btnColor="bg-orange" />
+        <ImageGrid images={food} />
       </Container>
     </Layout>
   )
@@ -41,7 +50,7 @@ const ListHeader = ({
   btnColor,
 }: {
   heading: string
-  type: 'posts' | 'questions'
+  type: 'posts' | 'questions' | 'food'
   btnColor: string
 }) => (
   <div className="flex items-center justify-between mb-4 md:mb-6">

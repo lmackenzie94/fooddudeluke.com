@@ -21,6 +21,8 @@
  */
 
 // This has the same effect as Server-Side Rendering (SSR) - i.e. no revalidation time = no stale content
+// BASICALLY, the Sanity webhook will be triggered when content is created, updated, or deleted...
+// ...which sends a request to this api route, which then revalidates the affected routes
 
 import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import type { NextApiRequest, NextApiResponse } from 'next'
