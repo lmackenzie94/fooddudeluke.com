@@ -68,7 +68,7 @@ export default function LoginPage() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </label>
-          <button type="submit" className="button bg-orange">
+          <button type="submit" className="text-xs text-white button bg-orange">
             Login
           </button>
         </form>
