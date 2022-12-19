@@ -21,6 +21,7 @@ export default function PreviewIndexPage({ token }: { token: null | string }) {
       preview
       posts={posts}
       questions={questions}
+      food={[]}
       settings={settings}
     />
   )

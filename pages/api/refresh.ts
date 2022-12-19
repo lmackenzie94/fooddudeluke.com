@@ -1,4 +1,5 @@
 // doesn't work if you include the .ts extension
+import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { fetchMostRecentImages } from '../../lib/my-food/fetchInstaImages'
@@ -10,12 +11,27 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  // authorizing the request using secret query param
-  // TODO: do this properly (JWT?)
-  if (req.query.s !== process.env.MY_SECRET) {
-    res.status(401).json({ message: 'Not today!' })
+  const authHeader = req.headers.authorization
+
+  if (authHeader.startsWith('Bearer ')) {
+    const token = authHeader.split(' ')[1]
+
+    try {
+      const decoded = jwt.verify(token, process.env.MY_SECRET)
+
+      if (!decoded) {
+        res.status(401).json({ message: 'Invalid token' })
+      }
+    } catch (e) {
+      res.status(401).json({ message: 'Something went wrong' })
+      return
+    }
+  } else {
+    res.status(401).json({ message: 'Invalid token' })
     return
   }
+
+  console.log('Token is valid, fetching images...')
 
   const imagesToFetch: number = +req.query.num || 1
 

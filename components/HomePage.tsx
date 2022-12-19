@@ -2,11 +2,14 @@ import Container from 'components/Container'
 import Layout from 'components/Layout'
 import PostsList from 'components/post/PostsList'
 import QuestionsList from 'components/question/QuestionsList'
+import useRefresh from 'hooks/useRefresh'
 import type { FoodImage } from 'lib/my-food/cloudinary'
 import type { Post, Question, Settings } from 'lib/sanity.queries'
 import Link from 'next/link'
+import { useState } from 'react'
 
 import ImageGrid from './ImageGrid'
+import RefreshButton from './RefreshButton'
 
 export default function HomePage(props: {
   preview?: boolean
@@ -37,7 +40,11 @@ export default function HomePage(props: {
         <QuestionsList questions={questions} />
 
         {/* Recent Food */}
-        <ListHeader heading="Recent Food." type="food" btnColor="bg-orange" />
+        <ListHeader heading="Recent Food." type="food" btnColor="bg-orange">
+          <div className="ml-2">
+            <RefreshButton buttonStyles="p-2 text-xl" />
+          </div>
+        </ListHeader>
         <ImageGrid images={food} />
       </Container>
     </Layout>
@@ -48,18 +55,21 @@ const ListHeader = ({
   heading,
   type,
   btnColor,
+  children,
 }: {
   heading: string
   type: 'posts' | 'questions' | 'food'
   btnColor: string
+  children?: React.ReactNode
 }) => (
   <div className="flex items-center justify-between mb-4 md:mb-6">
-    <h2 className="h1">{heading}</h2>
+    <h2 className="flex-1 h1">{heading}</h2>
     <Link
       href={`/${type}`}
       className={`button ml-4 inline-block text-xs text-white ${btnColor}`}
     >
       see all.
     </Link>
+    {children}
   </div>
 )
