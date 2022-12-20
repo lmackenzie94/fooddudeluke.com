@@ -1,6 +1,7 @@
 // doesn't work if you include the .ts extension
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
+import fetch from 'node-fetch'
 
 import type { Image } from '../../lib/my-food/fetchInstaImages'
 import { fetchMostRecentImages } from '../../lib/my-food/fetchInstaImages'
@@ -15,7 +16,7 @@ export default async function handler(
   try {
     const authHeader = req.headers.authorization
 
-    if (authHeader.startsWith('Bearer ')) {
+    if (authHeader?.startsWith('Bearer ')) {
       const token = authHeader.split(' ')[1]
 
       const decoded = jwt.verify(token, process.env.MY_SECRET)
@@ -35,8 +36,11 @@ export default async function handler(
       const images = await fetchMostRecentImages(imagesToFetch)
 
       if (!images || images.length === 0) {
+        await revalidateImagePages()
+
         return res.status(200).json({
-          message: 'No images found. Change your account to public, dummy!',
+          message:
+            'No images found. Change your account to public, dummy! Revalidated image pages, for the hell of it.',
         })
       }
 
@@ -47,15 +51,9 @@ export default async function handler(
 
       await uploadImages(images)
 
-      // revalidate images by making request to /api/revalidate
-      const result = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate?images=true`
-      )
-      const json = await result.json()
-
-      console.log(json.message)
-
       const successMessage = `Donezo! Uploaded ${images.length} image(s) to Cloudinary! (${imageCaptions})`
+
+      await revalidateImagePages()
 
       return res.status(200).json({ message: successMessage })
     } catch (e) {
@@ -68,4 +66,16 @@ export default async function handler(
 
 function getNewImageCaptions(images: Image[]) {
   return images.map((image) => image.caption).join(' AND ')
+}
+
+async function revalidateImagePages() {
+  console.log('Revalidating image pages...')
+  // revalidate images by making request to /api/revalidate
+  const resultJson = await (
+    await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate?images=true`
+    )
+  ).json()
+
+  return resultJson
 }

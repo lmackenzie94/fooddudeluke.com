@@ -37,6 +37,7 @@ export default async function revalidate(
 ) {
   try {
     // check for images=true query param to indicate that we should revalidate the images pages (i.e. Home and /food)
+    // works in Production but not in Development...
     if (req.query?.images === 'true') {
       const staleRoutes = ['/', '/food']
       console.log(
