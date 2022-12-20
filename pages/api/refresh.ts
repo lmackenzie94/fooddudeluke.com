@@ -69,12 +69,7 @@ function getNewImageCaptions(images: Image[]) {
 
 async function revalidateImagePages() {
   console.log('Revalidating image pages...')
-  console.log(process.env)
-  console.log('VERCEL_URL', process.env.VERCEL_URL)
-  // revalidate images by making request to /api/revalidate
-  const baseURL = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
-    : 'http://localhost:3000'
 
-  return await fetch(`${baseURL}/api/revalidate?images=true`)
+  // revalidate images by making request to /api/revalidate
+  return await fetch(`${process.env.BASE_URL}/api/revalidate?images=true`)
 }
