@@ -23,10 +23,8 @@ export default function HomePage(props: {
   // const { title, description } = settings || {}
 
   return (
-    <Layout preview={preview} loading={loading}>
+    <Layout preview={preview} loading={loading} logoTag="h1">
       <Container>
-        {/* <BlogHeader title={title} description={description} level={1} /> */}
-
         {/* Recent Posts */}
         <ListHeader heading="Recent Posts." type="posts" btnColor="bg-blue" />
         <PostsList posts={posts} />
@@ -41,7 +39,7 @@ export default function HomePage(props: {
 
         {/* Recent Food */}
         <ListHeader heading="Recent Food." type="food" btnColor="bg-orange">
-          <div className="ml-2">
+          <div className="ml-1">
             <RefreshButton buttonStyles="p-2 text-xl" />
           </div>
         </ListHeader>
@@ -62,8 +60,8 @@ const ListHeader = ({
   btnColor: string
   children?: React.ReactNode
 }) => (
-  <div className="flex items-center justify-between mb-4 md:mb-6">
-    <h2 className="flex-1 h1">{heading}</h2>
+  <div className="mb-4 flex items-center justify-between md:mb-6">
+    <h2 className="h1 flex-1">{heading}</h2>
     <Link
       href={`/${type}`}
       className={`button ml-4 inline-block text-xs text-white ${btnColor}`}

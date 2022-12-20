@@ -15,20 +15,20 @@ export default function Header({ titleTag = 'h2' }) {
       title: 'questions.',
       href: '/questions',
     },
-    // {
-    //   title: 'my food.',
-    //   href: '/my-food',
-    // },
+    {
+      title: 'food.',
+      href: '/food',
+    },
   ]
 
   const currentPath = usePathname()
 
   return (
-    <header className="fixed top-0 left-0 z-10 w-full bg-white shadow-md shadow-neutral-100">
-      <div className="container flex flex-col items-center pt-6 pb-8 bg-none sm:flex-row sm:justify-between">
+    <header className="shadow-neutral-100 fixed top-0 left-0 z-10 w-full bg-white shadow-md">
+      <div className="container flex flex-col items-center bg-none pt-6 pb-8 sm:flex-row sm:justify-between">
         <Link
           href="/"
-          className="mb-4 transition-transform duration-200 origin-bottom-left hover:-rotate-2 sm:mb-0"
+          className="mb-4 origin-bottom-left transition-transform duration-200 hover:-rotate-2 sm:mb-0"
         >
           <Tag className="cursor-pointer text-[2.6rem] font-bold leading-tight tracking-tighter sm:pr-8 sm:text-3xl">
             <Logo />

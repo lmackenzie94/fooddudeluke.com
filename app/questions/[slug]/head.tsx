@@ -1,4 +1,5 @@
-import BlogMeta from 'components/for-reference/BlogMeta'
+import { toPlainText } from '@portabletext/react'
+import DefaultMeta from 'components/DefaultMeta'
 import { getQuestionBySlug, getSettings } from 'lib/sanity.client'
 
 export default async function SlugHead({
@@ -6,14 +7,16 @@ export default async function SlugHead({
 }: {
   params: { slug: string }
 }) {
-  const [{ title }, question] = await Promise.all([
+  const [{ title, description }, question] = await Promise.all([
     getSettings(),
     getQuestionBySlug(params.slug),
   ])
+
+  const metaTitle = question.title ? `${question.title} | ${title}` : title
+
   return (
     <>
-      <title>{question.title ? `${question.title} | ${title}` : title}</title>
-      <BlogMeta />
+      <DefaultMeta title={metaTitle} description={toPlainText(description)} />
       {/* {post.coverImage?.asset?._ref && (
         <meta
           property="og:image"

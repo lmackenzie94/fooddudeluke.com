@@ -17,7 +17,7 @@ export default function Layout({
     <div className="site-layout">
       <AlertBanner preview={preview} loading={loading} />
       <Header titleTag={logoTag} />
-      <main className="container">{children}</main>
+      <main>{children}</main>
     </div>
   )
 }

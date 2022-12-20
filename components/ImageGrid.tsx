@@ -8,13 +8,7 @@ import styles from './ImageGrid.module.scss'
 const { theme } = require('../tailwind.config.js')
 import type { FoodImage } from 'lib/my-food/cloudinary'
 
-function ImageGrid({
-  images,
-  priority = false,
-}: {
-  images: FoodImage[]
-  priority?: boolean | number
-}) {
+function ImageGrid({ images }: { images: FoodImage[] }) {
   return (
     <div
       className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4"
@@ -54,7 +48,6 @@ function ImageGrid({
               width={image.width}
               height={image.height}
               sizes={`(max-width: ${theme.screens.sm}) 45vw, (max-width: ${theme.screens.md}) 180px, 200px`}
-              priority={priority ? i < priority : false}
               placeholder="blur"
               alt={image.caption}
             />

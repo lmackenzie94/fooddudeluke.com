@@ -45,33 +45,44 @@ export default function LoginPage() {
   return (
     <Layout preview={false}>
       <Container>
-        <h1>Login</h1>
+        <div className="mx-auto max-w-sm rounded-md bg-[#fff] px-4 py-6 shadow-md">
+          <h1 className="h1 with-mb">Login.</h1>
 
-        {error && <p className="text-orange">{error}</p>}
+          {error && <p className="text-orange">{error}</p>}
 
-        <form onSubmit={handleSubmit}>
-          <label>
-            Username:
+          <form className="flex flex-col" onSubmit={handleSubmit}>
+            <label className="sr-only" htmlFor="username">
+              Username:
+            </label>
+
             <input
+              className="mb-4 rounded-md border border-yellow p-2 focus:border-green focus:outline-none"
               type="text"
               name="username"
               value={username}
+              placeholder="Username"
               onChange={(e) => setUsername(e.target.value)}
             />
-          </label>
-          <label>
-            Password:
+            <label className="sr-only" htmlFor="password">
+              Password:
+            </label>
+
             <input
+              className="mb-4 rounded-md border border-yellow p-2 focus:border-green focus:outline-none"
               type="password"
               name="password"
               value={password}
+              placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
-          </label>
-          <button type="submit" className="text-xs text-white button bg-orange">
-            Login
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="button bg-orange text-xs text-white"
+            >
+              Login
+            </button>
+          </form>
+        </div>
       </Container>
     </Layout>
   )

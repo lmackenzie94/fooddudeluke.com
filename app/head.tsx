@@ -1,16 +1,16 @@
-import BlogMeta from 'components/for-reference/BlogMeta'
-import MetaDescription from 'components/for-reference/MetaDescription'
+// should return a React fragment, not a wrapping <head> tag.
+import { toPlainText } from '@portabletext/react'
+import DefaultMeta from 'components/DefaultMeta'
 import { getSettings } from 'lib/sanity.client'
 
+// TODO: make this better
 export default async function PageHead() {
   const { title, description, ogImage = {} } = await getSettings()
   const ogImageTitle = ogImage?.title
 
   return (
     <>
-      <title>{title}</title>
-      <BlogMeta />
-      <MetaDescription value={description} />
+      <DefaultMeta title={title} description={toPlainText(description)} />
       <meta
         property="og:image"
         // Because OG images must have a absolute URL, we use the

@@ -14,7 +14,7 @@ export default function PostsPage(props: {
   return (
     <Layout preview={preview} loading={loading}>
       <Container>
-        <h1 className="mb-4 h1 md:mb-6">All Posts.</h1>
+        <h1 className="h1 with-mb">All Posts.</h1>
         <PostsList posts={posts} />
       </Container>
     </Layout>

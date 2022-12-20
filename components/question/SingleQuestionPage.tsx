@@ -29,7 +29,7 @@ export default function SingleQuestionPage(props: {
           <PostTitle>Loading…</PostTitle>
         ) : (
           <>
-            <article className="prose-sm prose prose-h1:text-2xl prose-h2:text-lg md:prose-base">
+            <article className="prose prose-sm prose-h1:text-2xl prose-h2:text-lg md:prose-base">
               {/* <Head>
               <title>{title}</title>
               {question.socialImageURL && (
@@ -38,7 +38,7 @@ export default function SingleQuestionPage(props: {
             </Head> */}
 
               <h1
-                className="h1"
+                className="h1 with-mb"
                 dangerouslySetInnerHTML={{
                   __html: formatTitle(question.title),
                 }}
