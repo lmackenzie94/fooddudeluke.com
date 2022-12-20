@@ -9,6 +9,7 @@
 - PurgeCSS ?
 - get Integromat integration working (https://us1.make.com/153064/scenarios/552129/edit)
 - get Preview working
+- need to revalidate the image grid somehow so new images show without having to rebuild
 
 ## Helpful Commands
 

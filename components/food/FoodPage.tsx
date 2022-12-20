@@ -3,6 +3,7 @@
 import Container from 'components/Container'
 import ImageGrid from 'components/ImageGrid'
 import Layout from 'components/Layout'
+import RefreshButton from 'components/RefreshButton'
 import type { FoodImage } from 'lib/my-food/cloudinary'
 import { useEffect, useState } from 'react'
 
@@ -44,28 +45,25 @@ export default function FoodPage(props: {
         {/* <Head>
         <title>{title}</title>
       </Head> */}
-        <h1 className="h1 with-mb">
-          My Food.{' '}
-          <span className="text-xs text-blue/20">{`(${food.length})`}</span>
-        </h1>
-
-        {/* <h1 className="mb-5 h1">
-        My Food.{' '}
-        <span className="text-xs text-blue/20">{`(${allImages.length})`}</span>
-      </h1> */}
-        <div>
-          <ImageGrid images={imagesToShow} />
-          <p className="mt-4 text-right text-xs">{currentPageMessage}</p>
-
-          {images.length > imagesToShow.length && (
-            <button
-              className="button mb-14 bg-blue text-white"
-              onClick={loadMoreImages}
-            >
-              load more.
-            </button>
-          )}
+        <div className="flex justify-between align-baseline">
+          <h1 className="h1 with-mb">
+            My Food.{' '}
+            <span className="text-xs text-blue/20">{`(${food.length})`}</span>
+          </h1>
+          <RefreshButton buttonStyles="p-2 text-xl" />
         </div>
+
+        <ImageGrid images={imagesToShow} />
+        <p className="mt-4 text-right text-xs">{currentPageMessage}</p>
+
+        {images.length > imagesToShow.length && (
+          <button
+            className="button mb-14 bg-blue text-white"
+            onClick={loadMoreImages}
+          >
+            load more.
+          </button>
+        )}
       </Container>
     </Layout>
   )

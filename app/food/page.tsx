@@ -29,5 +29,5 @@ export default async function IndexRoute() {
   return <FoodPage food={food} />
 }
 
-// REMEMBER: don't need "revalidate" because our `/pages/api/revalidate.ts` route + Sanity Webhook will handle revalidation
+// TODO: revalidate images using `/pages/api/revalidate.ts` and remove this
 // export const revalidate = 1

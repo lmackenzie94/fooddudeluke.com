@@ -96,8 +96,6 @@ export const questionBySlugQuery = groq`
 }
 `
 
-// INTERFACES --------------------------------------------------------------------------------------------------------------
-
 export interface Author {
   name?: string
   picture?: any

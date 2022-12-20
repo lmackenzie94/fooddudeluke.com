@@ -4,8 +4,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 export default function login(req: NextApiRequest, res: NextApiResponse) {
   if (!req.body) {
     res.statusCode = 404
-    res.end('Error')
-    return
+    return res.end('Error')
   }
 
   const { username, password } = req.body
@@ -15,8 +14,7 @@ export default function login(req: NextApiRequest, res: NextApiResponse) {
 
   if (username !== ADMIN_USERNAME || password !== ADMIN_PASSWORD) {
     res.statusCode = 401
-    res.end('Error: Invalid username or password')
-    return
+    return res.end('Error: Invalid username or password')
   }
 
   res.json({

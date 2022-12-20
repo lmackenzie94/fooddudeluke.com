@@ -36,6 +36,21 @@ export default async function revalidate(
   res: NextApiResponse
 ) {
   try {
+    // check for images=true query param to indicate that we should revalidate the images pages (i.e. Home and /food)
+    if (req.query?.images === 'true') {
+      const staleRoutes = ['/', '/food']
+      console.log(
+        `Revalidating the following routes: ${staleRoutes.join(', ')}`
+      )
+
+      await Promise.all(staleRoutes.map((route) => res.revalidate(route)))
+
+      const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
+      console.log(updatedRoutes)
+
+      return res.status(200).send(updatedRoutes)
+    }
+
     const { body, isValidSignature } = await parseBody(
       req,
       process.env.SANITY_REVALIDATE_SECRET
