@@ -50,15 +50,15 @@ export default function FoodPage(props: {
             My Food.{' '}
             <span className="text-xs text-blue/20">{`(${food.length})`}</span>
           </h1>
-          <RefreshButton buttonStyles="p-2 text-xl" />
+          <RefreshButton buttonStyles="px-2 text-xl" />
         </div>
 
         <ImageGrid images={imagesToShow} />
-        <p className="mt-4 text-right text-xs">{currentPageMessage}</p>
+        <p className="mt-4 text-xs text-right">{currentPageMessage}</p>
 
         {images.length > imagesToShow.length && (
           <button
-            className="button mb-14 bg-blue text-white"
+            className="text-white button mb-14 bg-blue"
             onClick={loadMoreImages}
           >
             load more.
