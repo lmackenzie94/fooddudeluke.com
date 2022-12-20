@@ -70,11 +70,7 @@ function getNewImageCaptions(images: Image[]) {
 async function revalidateImagePages() {
   console.log('Revalidating image pages...')
   // revalidate images by making request to /api/revalidate
-  const resultJson = await (
-    await fetch(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/revalidate?images=true`
-    )
-  ).json()
+  const resultJson = await (await fetch(`/api/revalidate?images=true`)).json()
 
   return resultJson
 }
