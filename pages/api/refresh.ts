@@ -73,5 +73,6 @@ async function revalidateImagePages() {
   const baseURL = process.env.VERCEL_URL
     ? `https://${process.env.VERCEL_URL}`
     : 'http://localhost:3000'
-  return await (await fetch(`${baseURL}/api/revalidate?images=true`)).json()
+
+  return await fetch(`${baseURL}/api/revalidate?images=true`)
 }

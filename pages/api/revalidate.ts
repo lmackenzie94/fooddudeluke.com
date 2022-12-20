@@ -49,7 +49,8 @@ export default async function revalidate(
       const updatedRoutes = `Updated routes: ${staleRoutes.join(', ')}`
       console.log(updatedRoutes)
 
-      return res.status(200).send(updatedRoutes)
+      // return res.status(200).send(updatedRoutes)
+      return res.status(200).json({ message: updatedRoutes })
     }
 
     const { body, isValidSignature } = await parseBody(
