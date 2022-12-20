@@ -1,7 +1,6 @@
 // doesn't work if you include the .ts extension
 import jwt from 'jsonwebtoken'
 import type { NextApiRequest, NextApiResponse } from 'next'
-import fetch from 'node-fetch'
 
 import type { Image } from '../../lib/my-food/fetchInstaImages'
 import { fetchMostRecentImages } from '../../lib/my-food/fetchInstaImages'
@@ -57,7 +56,7 @@ export default async function handler(
 
       return res.status(200).json({ message: successMessage })
     } catch (e) {
-      throw new Error('Error fetching images')
+      throw new Error(`Error fetching images: ${e.message}`)
     }
   } catch (e) {
     return res.status(500).json({ message: `Oopsie Daisy: ${e.message}` })
