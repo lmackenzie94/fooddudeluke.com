@@ -44,12 +44,6 @@ export default function SinglePostPage(props: {
                 }}
               />
 
-              {/* <div className="max-w-2xl mx-auto">
-              <div className="mb-6 text-lg">
-                <Date dateString={post.date} />
-              </div>
-            </div> */}
-
               <PostBody content={post.body} />
             </article>
             {/* <SectionSeparator />
