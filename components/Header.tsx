@@ -24,7 +24,7 @@ export default function Header({ titleTag = 'h2' }) {
   const currentPath = usePathname()
 
   return (
-    <header className="shadow-neutral-100 fixed top-0 left-0 z-10 w-full bg-white shadow-md">
+    <header className="shadow-neutral-100 fixed top-0 left-0 z-10 w-full bg-white-full shadow-md">
       <div className="container flex flex-col items-center bg-none pt-6 pb-8 sm:flex-row sm:justify-between">
         <Link
           href="/"
