@@ -11,19 +11,17 @@ export default function Alert({
   if (!preview) return
 
   return (
-    <div className="border-accent-7 bg-accent-7 border-b text-white">
-      <Container>
-        <div className="py-2 text-center text-sm">
-          {loading ? 'Loading... ' : 'This page is a preview. '}
-          <a
-            href="/api/exit-preview"
-            className="hover:text-cyan underline transition-colors duration-200"
-          >
-            Click here
-          </a>{' '}
-          to exit preview mode.
-        </div>
-      </Container>
+    <div className="fixed bottom-0 z-10 w-full rounded-sm bg-orange text-white">
+      <div className="p-2 text-center text-sm">
+        {loading ? 'Loading... ' : 'This page is a preview. '}
+        <a
+          href="/api/exit-preview"
+          className="hover:text-cyan underline transition-colors duration-200"
+        >
+          Click here
+        </a>{' '}
+        to exit preview mode.
+      </div>
     </div>
   )
 }

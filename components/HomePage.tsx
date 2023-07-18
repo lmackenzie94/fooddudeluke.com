@@ -38,12 +38,12 @@ export default function HomePage(props: {
         <QuestionsList questions={questions} />
 
         {/* Recent Food */}
-        <ListHeader heading="Recent Food." type="food" btnColor="bg-orange">
+        {/* <ListHeader heading="Recent Food." type="food" btnColor="bg-orange">
           <div className="ml-1">
             <RefreshButton buttonStyles="px-2 text-xl" />
           </div>
         </ListHeader>
-        <ImageGrid images={food} />
+        <ImageGrid images={food} /> */}
       </Container>
     </Layout>
   )
@@ -60,8 +60,8 @@ const ListHeader = ({
   btnColor: string
   children?: React.ReactNode
 }) => (
-  <div className="flex items-center justify-between mb-4 md:mb-6">
-    <h2 className="flex-1 h1">{heading}</h2>
+  <div className="mb-4 flex items-center justify-between md:mb-6">
+    <h2 className="h1 flex-1">{heading}</h2>
     <Link
       href={`/${type}`}
       className={`button ml-4 inline-block text-xs text-white ${btnColor}`}
