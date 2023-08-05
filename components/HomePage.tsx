@@ -2,25 +2,17 @@ import Container from 'components/Container'
 import Layout from 'components/Layout'
 import PostsList from 'components/post/PostsList'
 import QuestionsList from 'components/question/QuestionsList'
-import useRefresh from 'hooks/useRefresh'
-import type { FoodImage } from 'lib/my-food/cloudinary'
 import type { Post, Question, Settings } from 'lib/sanity.queries'
 import Link from 'next/link'
-import { useState } from 'react'
-
-import ImageGrid from './ImageGrid'
-import RefreshButton from './RefreshButton'
 
 export default function HomePage(props: {
   preview?: boolean
   loading?: boolean
   posts: Post[]
   questions: Question[]
-  food: FoodImage[]
   settings: Settings
 }) {
-  const { preview, loading, posts, questions, food, settings } = props
-  // const { title, description } = settings || {}
+  const { preview, loading, posts, questions } = props
 
   return (
     <Layout preview={preview} loading={loading} logoTag="h1">
@@ -36,14 +28,6 @@ export default function HomePage(props: {
           btnColor="bg-green"
         />
         <QuestionsList questions={questions} />
-
-        {/* Recent Food */}
-        {/* <ListHeader heading="Recent Food." type="food" btnColor="bg-orange">
-          <div className="ml-1">
-            <RefreshButton buttonStyles="px-2 text-xl" />
-          </div>
-        </ListHeader>
-        <ImageGrid images={food} /> */}
       </Container>
     </Layout>
   )

@@ -1,0 +1,37 @@
+.site-layout {
+  @apply min-h-screen bg-white-full pb-8 pt-52 text-black sm:pt-40;
+
+  .gradient-container {
+    width: 100vw;
+    min-height: 100vh;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    pointer-events: none;
+
+    .gradient {
+      z-index: 3;
+      background-image: radial-gradient(
+          at 100% 21%,
+          #12492f 0px,
+          transparent 50%
+        ),
+        radial-gradient(at 25% 99%, #d5370b 0px, transparent 50%),
+        radial-gradient(at 0% 29%, #3b38ab 0px, transparent 50%),
+        radial-gradient(at 75% 96%, #f7a222 0px, transparent 50%);
+      position: absolute;
+      content: '';
+      width: 100%;
+      max-width: 700px;
+      height: 80%;
+      filter: blur(100px) saturate(150%);
+      top: 80px;
+      opacity: 0.1;
+    }
+  }
+
+  main {
+    position: relative;
+    z-index: 1;
+  }
+}

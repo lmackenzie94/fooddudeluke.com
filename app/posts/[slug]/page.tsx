@@ -1,6 +1,6 @@
-import PreviewPostPage from 'components/for-reference/PreviewPostPage'
-import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
 import SinglePostPage from 'components/post/SinglePostPage'
+import PreviewPostPage from 'components/preview/PreviewPostPage'
+import { PreviewSuspense } from 'components/preview/PreviewSuspense'
 import {
   getAllPostsSlugs,
   getPostAndMorePosts,

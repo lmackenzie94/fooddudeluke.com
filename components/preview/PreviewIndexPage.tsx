@@ -17,12 +17,6 @@ export default function PreviewIndexPage({ token }: { token: null | string }) {
   const settings: Settings = usePreview(token, settingsQuery) || {}
 
   return (
-    <HomePage
-      preview
-      posts={posts}
-      questions={questions}
-      food={[]}
-      settings={settings}
-    />
+    <HomePage preview posts={posts} questions={questions} settings={settings} />
   )
 }

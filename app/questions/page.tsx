@@ -1,5 +1,5 @@
-import PreviewIndexPage from 'components/for-reference/PreviewIndexPage'
-import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
+import PreviewIndexPage from 'components/preview/PreviewIndexPage'
+import { PreviewSuspense } from 'components/preview/PreviewSuspense'
 import QuestionsPage from 'components/question/QuestionsPage'
 import { getQuestions } from 'lib/sanity.client'
 import { previewData } from 'next/headers'

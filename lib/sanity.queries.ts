@@ -6,9 +6,7 @@ const postFields = groq`
   _id,
   title,
   date,
-  // coverImage,
   "slug": slug.current,
-  "author": author->{name, picture},
   'categories': categories[]->{title, description, color},
   socialImageURL,
   content,
@@ -96,17 +94,11 @@ export const questionBySlugQuery = groq`
 }
 `
 
-export interface Author {
-  name?: string
-  picture?: any
-}
-
 export interface Post {
   _id: string
   title?: string
   // coverImage?: any
   date?: string
-  author?: Author
   slug?: string
   content?: any
   body?: any

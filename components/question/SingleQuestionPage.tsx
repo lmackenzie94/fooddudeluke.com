@@ -48,8 +48,6 @@ export default function SingleQuestionPage(props: {
 
               <PostBody content={question.body} />
             </article>
-            {/* <SectionSeparator />
-            {moreQuestions?.length > 0 && <MoreStories questions={moreQuestions} />} */}
           </>
         )}
       </Container>

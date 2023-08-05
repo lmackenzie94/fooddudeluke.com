@@ -1,5 +1,5 @@
-import PreviewPostPage from 'components/for-reference/PreviewPostPage'
-import { PreviewSuspense } from 'components/for-reference/PreviewSuspense'
+import PreviewPostPage from 'components/preview/PreviewPostPage'
+import { PreviewSuspense } from 'components/preview/PreviewSuspense'
 import SingleQuestionPage from 'components/question/SingleQuestionPage'
 import {
   getAllQuestionsSlugs,

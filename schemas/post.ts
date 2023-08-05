@@ -1,8 +1,6 @@
-import { format, parseISO } from 'date-fns'
 import { BsPencilSquare } from 'react-icons/bs'
 import { defineField, defineType } from 'sanity'
 
-import authorType from './author'
 import categoryType from './category'
 
 export default defineType({
@@ -26,12 +24,6 @@ export default defineType({
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
       validation: (rule) => rule.required(),
-    }),
-    defineField({
-      name: 'author',
-      title: 'Author',
-      type: 'reference',
-      to: [{ type: authorType.name }],
     }),
     defineField({
       name: 'date',
@@ -67,14 +59,6 @@ export default defineType({
       type: 'url',
       description: 'URL will be automatically generated on save.',
     }),
-    // {
-    //   name: 'mainImage',
-    //   title: 'Main image',
-    //   type: 'image',
-    //   options: {
-    //     hotspot: true,
-    //   },
-    // },
   ],
   preview: {
     select: {
@@ -82,9 +66,7 @@ export default defineType({
       category1: 'categories.0.title',
       category2: 'categories.1.title',
       category3: 'categories.2.title',
-      // media: 'mainImage',
     },
-    // prepare({ title, media, author, date }) {
     prepare({ title, category1, category2, category3 }) {
       const categories = [category1, category2, category3].filter(Boolean)
       console.log('categories', categories)

@@ -2,6 +2,7 @@
 
 @tailwind base;
 @tailwind components;
+@tailwind utilities;
 
 @layer base {
   /* keeps the scrollbar visible even when not required 
@@ -12,10 +13,6 @@
   }
 
   body {
-    // @apply bg-white pb-8 pt-52 text-black sm:pt-40;
-    // background-image: url('/food-bg.webp');
-    // background-size: 95%;
-
     &::-webkit-scrollbar {
       width: 0.6em;
     }
@@ -25,52 +22,6 @@
     &::-webkit-scrollbar-thumb {
       @apply bg-orange;
     }
-
-    .main {
-      width: 100vw;
-      min-height: 100vh;
-      position: fixed;
-      display: flex;
-      justify-content: center;
-      pointer-events: none;
-
-      .gradient {
-        z-index: 3;
-        background-image: radial-gradient(
-            at 100% 21%,
-            #12492f 0px,
-            transparent 50%
-          ),
-          radial-gradient(at 25% 99%, #d5370b 0px, transparent 50%),
-          radial-gradient(at 0% 29%, #3b38ab 0px, transparent 50%),
-          radial-gradient(at 75% 96%, #f7a222 0px, transparent 50%);
-        position: absolute;
-        content: '';
-        width: 100%;
-        max-width: 700px;
-        height: 80%;
-        filter: blur(100px) saturate(150%);
-        top: 80px;
-        opacity: 0.1;
-      }
-    }
-  }
-
-  .site-layout {
-    @apply min-h-screen bg-white-full pb-8 pt-52 text-black sm:pt-40;
-  }
-
-  main {
-    position: relative;
-    z-index: 1;
-  }
-
-  .h1 {
-    @apply text-xl font-bold leading-tight tracking-tight md:text-3xl;
-
-    &.with-mb {
-      @apply mb-4 md:mb-6;
-    }
   }
 }
 
@@ -78,15 +29,21 @@
   .button {
     @apply inline-block rounded-md px-3 py-1;
   }
+}
+
+@layer utilities {
+  .h1 {
+    @apply text-xl font-bold leading-tight tracking-tight md:text-3xl;
+
+    &.with-mb {
+      @apply mb-4 md:mb-6;
+    }
+  }
 
   .text-shadow {
     text-shadow: 0px 0px 0.5px currentcolor;
   }
-}
 
-@tailwind utilities;
-
-@layer utilities {
   .glassmorphism {
     @apply bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur;
   }

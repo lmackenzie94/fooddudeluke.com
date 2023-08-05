@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import Container from 'components/Container'
-
 export default function Alert({
   preview,
   loading,

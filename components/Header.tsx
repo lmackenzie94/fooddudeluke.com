@@ -15,10 +15,6 @@ export default function Header({ titleTag = 'h2' }) {
       title: 'questions.',
       href: '/questions',
     },
-    // {
-    //   title: 'food.',
-    //   href: '/food',
-    // },
   ]
 
   const currentPath = usePathname()
