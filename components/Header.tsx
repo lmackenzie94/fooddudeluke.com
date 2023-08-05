@@ -21,7 +21,7 @@ export default function Header({ titleTag = 'h2' }) {
 
   return (
     <header className="fixed top-0 left-0 z-10 w-full bg-white-full shadow-md shadow-gray-100">
-      <div className="container flex flex-col items-center bg-none pt-6 pb-8 sm:flex-row sm:justify-between">
+      <div className="container flex flex-col items-center bg-none py-6 sm:flex-row sm:justify-between">
         <Link href="/" className="mb-4 sm:mb-0">
           <Tag className="cursor-pointer text-[2.6rem] font-bold leading-tight tracking-tighter sm:pr-8 sm:text-3xl">
             <Logo />

@@ -5,7 +5,6 @@ import { groq } from 'next-sanity'
 const postFields = groq`
   _id,
   title,
-  date,
   "slug": slug.current,
   'categories': categories[]->{title, description, color},
   socialImageURL,
@@ -29,7 +28,7 @@ export const settingsQuery = groq`*[_type == "settings"][0]`
 // POSTS -----------------------------------------------------------------------------------------------------------------
 
 export const postsQuery = (numOfPosts?: number) => {
-  const baseQuery = `*[_type == "post"] | order(date desc, _updatedAt desc)`
+  const baseQuery = `*[_type == "post"] | order(_updatedAt desc)`
 
   return groq`
    ${baseQuery} ${numOfPosts ? `[0...${numOfPosts}]` : ''} {
@@ -44,7 +43,7 @@ export const postAndMorePostsQuery = groq`
     content,
     ${postFields}
   },
-  "morePosts": *[_type == "post" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+  "morePosts": *[_type == "post" && slug.current != $slug] | order(_updatedAt desc) [0...2] {
     content,
     ${postFields}
   }
@@ -63,7 +62,7 @@ export const postBySlugQuery = groq`
 // QUESTIONS --------------------------------------------------------------------------------------------------------------
 
 export const questionsQuery = (numOfQuestions?: number) => {
-  const baseQuery = `*[_type == "question"] | order(date desc, _updatedAt desc)`
+  const baseQuery = `*[_type == "question"] | order(_updatedAt desc)`
 
   return groq`
    ${baseQuery} ${numOfQuestions ? `[0...${numOfQuestions}]` : ''} {
@@ -78,7 +77,7 @@ export const questionAndMoreQuestionsQuery = groq`
     content,
     ${questionFields}
   },
-  "moreQuestions": *[_type == "question" && slug.current != $slug] | order(date desc, _updatedAt desc) [0...2] {
+  "moreQuestions": *[_type == "question" && slug.current != $slug] | order(_updatedAt desc) [0...2] {
     content,
     ${questionFields}
   }
@@ -97,8 +96,6 @@ export const questionBySlugQuery = groq`
 export interface Post {
   _id: string
   title?: string
-  // coverImage?: any
-  date?: string
   slug?: string
   content?: any
   body?: any

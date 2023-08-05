@@ -45,6 +45,6 @@
   }
 
   .glassmorphism {
-    @apply bg-white/20 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur;
+    @apply bg-white-full/5 shadow-[inset_10px_-50px_94px_0_rgb(199,199,199,0.2)] backdrop-blur;
   }
 }
