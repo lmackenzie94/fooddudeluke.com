@@ -1,8 +1,5 @@
 import HomePage from 'components/HomePage'
-import PreviewIndexPage from 'components/preview/PreviewIndexPage'
-import { PreviewSuspense } from 'components/preview/PreviewSuspense'
 import { getPosts, getQuestions, getSettings } from 'lib/sanity.client'
-import { previewData } from 'next/headers'
 
 export default async function IndexRoute() {
   // Fetch queries in parallel
@@ -11,26 +8,6 @@ export default async function IndexRoute() {
     getPosts(5),
     getQuestions(5),
   ])
-
-  if (previewData()) {
-    const token = previewData().token || null
-
-    return (
-      <PreviewSuspense
-        fallback={
-          <HomePage
-            loading
-            preview
-            posts={posts}
-            questions={questions}
-            settings={settings}
-          />
-        }
-      >
-        <PreviewIndexPage token={token} />
-      </PreviewSuspense>
-    )
-  }
 
   return <HomePage posts={posts} questions={questions} settings={settings} />
 }

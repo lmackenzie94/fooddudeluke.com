@@ -1,12 +1,9 @@
-import PreviewPostPage from 'components/preview/PreviewPostPage'
-import { PreviewSuspense } from 'components/preview/PreviewSuspense'
 import SingleQuestionPage from 'components/question/SingleQuestionPage'
 import {
   getAllQuestionsSlugs,
   getQuestionAndMoreQuestions,
   getSettings,
 } from 'lib/sanity.client'
-import { previewData } from 'next/headers'
 
 export async function generateStaticParams() {
   return await getAllQuestionsSlugs()
@@ -19,25 +16,6 @@ export default async function SlugRoute({
 }) {
   // Start fetching settings early, so it runs in parallel with the post query
   const settings = getSettings()
-
-  if (previewData()) {
-    const token = previewData().token || null
-    const data = getQuestionAndMoreQuestions(params.slug, token)
-    return (
-      <PreviewSuspense
-        fallback={
-          <SingleQuestionPage
-            loading
-            preview
-            data={await data}
-            settings={await settings}
-          />
-        }
-      >
-        <PreviewPostPage token={token} slug={params.slug} />
-      </PreviewSuspense>
-    )
-  }
 
   const data = getQuestionAndMoreQuestions(params.slug)
   return <SingleQuestionPage data={await data} settings={await settings} />
