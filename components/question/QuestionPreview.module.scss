@@ -6,7 +6,7 @@
   }
 
   &:nth-child(4n + 4) {
-    @apply border-blue hover:bg-blue/10;
+    @apply border-blue hover:bg-blue/5;
 
     h3 span {
       @apply text-blue;
@@ -14,7 +14,7 @@
   }
 
   &:nth-child(4n + 3) {
-    @apply border-green hover:bg-green/10;
+    @apply border-green hover:bg-green/5;
 
     h3 span {
       @apply text-green;
@@ -22,7 +22,7 @@
   }
 
   &:nth-child(4n + 2) {
-    @apply border-yellow hover:bg-yellow/10;
+    @apply border-yellow hover:bg-yellow/5;
 
     h3 span {
       @apply text-yellow;
@@ -30,7 +30,7 @@
   }
 
   &:nth-child(4n + 1) {
-    @apply border-orange hover:bg-orange/10;
+    @apply border-orange hover:bg-orange/5;
 
     h3 span {
       @apply text-orange;

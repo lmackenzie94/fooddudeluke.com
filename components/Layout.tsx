@@ -17,6 +17,9 @@ export default function Layout({
     <div className="site-layout">
       <AlertBanner preview={preview} loading={loading} />
       <Header titleTag={logoTag} />
+      <div className="main">
+        <div className="gradient"></div>
+      </div>
       <main>{children}</main>
     </div>
   )

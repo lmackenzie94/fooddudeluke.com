@@ -17,9 +17,9 @@ export default function QuestionPreview({
     <Link
       href={`/questions/${slug}`}
       data-test="item-preview"
-      className={`${styles.questionLink} mb-2 flex items-center justify-between border-x-4 bg-gray-100 px-3 py-2 md:px-4`}
+      className={`${styles.questionLink} mb-2 flex items-center justify-between border-x-4 bg-white-full px-3 py-2 md:px-4`}
     >
-      <article className="flex items-center justify-between w-full">
+      <article className="flex w-full items-center justify-between">
         <h3
           className="text-sm leading-snug md:text-base"
           data-test="item-preview-title"
