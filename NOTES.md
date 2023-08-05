@@ -10,8 +10,9 @@
 - PurgeCSS ?
 - get Integromat integration working (https://us1.make.com/153064/scenarios/552129/edit)
 - get Preview working
-- dark mode 
+- dark mode
 - get OG images working - check how it's being done in Settings
+- Add auth (Next-Auth) and allow "Favourites" (see Promptopia project for reference)
 
 ## Helpful Commands
 
