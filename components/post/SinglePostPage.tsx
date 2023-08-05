@@ -42,7 +42,7 @@ export default function SinglePostPage(props: {
               <h1
                 className={`${styles.h1} h1`}
                 dangerouslySetInnerHTML={{
-                  __html: formatTitle(post.title),
+                  __html: formatTitle(post.title, post.categories),
                 }}
               />
 

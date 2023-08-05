@@ -24,7 +24,7 @@ export default function QuestionPreview({
           className="text-sm leading-snug md:text-base"
           data-test="item-preview-title"
           dangerouslySetInnerHTML={{
-            __html: formatTitle(title),
+            __html: formatTitle(title, categories),
           }}
         />
         {categories?.map((category) => (

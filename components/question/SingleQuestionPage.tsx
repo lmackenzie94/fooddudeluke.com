@@ -6,6 +6,8 @@ import type { Question, Settings } from 'lib/sanity.queries'
 import { formatTitle } from 'lib/utils/formatTitle'
 import { notFound } from 'next/navigation'
 
+import styles from './SingleQuestionPage.module.scss'
+
 export default function SingleQuestionPage(props: {
   preview?: boolean
   loading?: boolean
@@ -38,17 +40,11 @@ export default function SingleQuestionPage(props: {
             </Head> */}
 
               <h1
-                className="h1 with-mb"
+                className={`${styles.h1} h1`}
                 dangerouslySetInnerHTML={{
-                  __html: formatTitle(question.title),
+                  __html: formatTitle(question.title, question.categories),
                 }}
               />
-
-              {/* <div className="max-w-2xl mx-auto">
-              <div className="mb-6 text-lg">
-                <Date dateString={question.date} />
-              </div>
-            </div> */}
 
               <PostBody content={question.body} />
             </article>

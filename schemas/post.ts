@@ -79,18 +79,19 @@ export default defineType({
   preview: {
     select: {
       title: 'title',
-      author: 'author.name',
-      date: 'date',
+      category1: 'categories.0.title',
+      category2: 'categories.1.title',
+      category3: 'categories.2.title',
       // media: 'mainImage',
     },
     // prepare({ title, media, author, date }) {
-    prepare({ title, author, date }) {
-      const subtitles = [
-        author && `by ${author}`,
-        date && `on ${format(parseISO(date), 'LLL d, yyyy')}`,
-      ].filter(Boolean)
+    prepare({ title, category1, category2, category3 }) {
+      const categories = [category1, category2, category3].filter(Boolean)
+      console.log('categories', categories)
+      const subtitles = [categories && `${categories.join(', ')}`].filter(
+        Boolean
+      )
 
-      // return { title, media, subtitle: subtitles.join(' ') }
       return { title, subtitle: subtitles.join(' ') }
     },
   },

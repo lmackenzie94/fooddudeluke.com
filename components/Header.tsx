@@ -39,8 +39,8 @@ export default function Header({ titleTag = 'h2' }) {
                   href={item.href}
                   className={`${
                     currentPath === `${item.href}`
-                      ? `text-shadow text-orange`
-                      : `text-gray-500 hover:text-orange`
+                      ? `text-shadow text-blue`
+                      : `text-gray-500 hover:text-blue`
                   } text-md `}
                 >
                   {item.title}
