@@ -12,9 +12,10 @@
 import { NextStudio } from 'next-sanity/studio'
 import config from 'sanity.config'
 
-export const metadata = {
-  title: 'Studio | food dude luke.',
-}
+//! Can't use this because this is a client component
+// export const metadata = {
+//   title: 'Studio | food dude luke.',
+// }
 
 export default function StudioPage() {
   return <NextStudio config={config} />
