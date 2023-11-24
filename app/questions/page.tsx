@@ -1,5 +1,14 @@
 import QuestionsPage from 'components/question/QuestionsPage'
-import { getQuestions } from 'lib/sanity.client'
+import { getQuestions, getSettings } from 'lib/sanity.client'
+import { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { title } = await getSettings()
+
+  return {
+    title: `Questions | ${title}`,
+  }
+}
 
 export default async function QuestionsRoute() {
   const questions = await getQuestions()

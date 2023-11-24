@@ -1,5 +1,7 @@
 import type { Category } from 'lib/sanity.queries'
 
+import { getPostTitlePrefix } from './getPostTitlePrefix'
+
 export const formatTitle = (title: string, categories?: Category[]): string => {
   let formattedTitle = title
   // // if title contains asterisks...
@@ -15,12 +17,18 @@ export const formatTitle = (title: string, categories?: Category[]): string => {
   //   formattedTitle = formattedTitle.replace(regex, `:<span>$1</span>`)
   // }
 
-  if (categories?.some((category) => category.title === 'Cooking Guide')) {
-    formattedTitle = `Cooking: <span>${title}</span>`
-  }
+  const postPrefix = getPostTitlePrefix(categories)
 
-  if (categories?.some((category) => category.title === 'Buying Guide')) {
-    formattedTitle = `Buying: <span>${title}</span>`
+  // if (categories?.some((category) => category.title === 'Cooking Guide')) {
+  //   formattedTitle = `Cooking: <span>${title}</span>`
+  // }
+
+  // if (categories?.some((category) => category.title === 'Buying Guide')) {
+  //   formattedTitle = `Buying: <span>${title}</span>`
+  // }
+
+  if (postPrefix) {
+    formattedTitle = `${postPrefix}: <span>${title}</span>`
   }
 
   return formattedTitle

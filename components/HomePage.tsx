@@ -10,7 +10,6 @@ export default function HomePage(props: {
   loading?: boolean
   posts: Post[]
   questions: Question[]
-  settings: Settings
 }) {
   const { preview, loading, posts, questions } = props
 

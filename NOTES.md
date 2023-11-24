@@ -13,6 +13,7 @@
 - dark mode
 - get OG images working - check how it's being done in Settings
 - Add auth (Next-Auth) and allow "Favourites" (see Promptopia project for reference)
+- Fix Lighthouse GH Action (https://github.com/jakejarvis/lighthouse-action/issues/31)
 
 ## Helpful Commands
 

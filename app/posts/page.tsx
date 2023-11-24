@@ -1,5 +1,14 @@
 import PostsPage from 'components/post/PostsPage'
-import { getPosts } from 'lib/sanity.client'
+import { getPosts, getSettings } from 'lib/sanity.client'
+import { Metadata } from 'next'
+
+export async function generateMetadata(): Promise<Metadata> {
+  const { title } = await getSettings()
+
+  return {
+    title: `Posts | ${title}`,
+  }
+}
 
 export default async function PostsRoute() {
   const posts = await getPosts()

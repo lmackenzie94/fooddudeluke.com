@@ -2,11 +2,26 @@ import SinglePostPage from 'components/post/SinglePostPage'
 import {
   getAllPostsSlugs,
   getPostAndMorePosts,
+  getPostBySlug,
   getSettings,
 } from 'lib/sanity.client'
+import { getPostTitlePrefix } from 'lib/utils/getPostTitlePrefix'
+import { Metadata } from 'next'
 
 export async function generateStaticParams() {
   return await getAllPostsSlugs()
+}
+
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const { title } = await getSettings()
+  const { title: postTitle, categories } = await getPostBySlug(params.slug)
+
+  const postTitlePrefix = getPostTitlePrefix(categories)
+  const fullPostTitle = `${postTitlePrefix}: ${postTitle}`
+
+  return {
+    title: `${fullPostTitle} | ${title}`,
+  }
 }
 
 export default async function SlugRoute({
